@@ -1,0 +1,10 @@
+terms,description
+computer virus,"A type of malicious software that spreads and infects other programs by inserting its code into them, causing unwanted and harmful effects on a computer."
+network,"A collection of interconnected computers and devices that communicate and share resources with each other, often including the internet."
+trojan horse,"A type of malware disguised as legitimate software, tricking users into installing it, and allowing unauthorized access or causing harm to the system."
+botnet,"A network of compromised computers controlled by a single entity, often used to perform malicious activities such as distributing spam, launching attacks, or stealing information."
+malicious code embedded web page,"Code inserted into a web page with the intent of exploiting vulnerabilities in visitors' browsers, often leading to unauthorized access or the installation of malware."
+malicious code hosting site,"A website that hosts and distributes malicious code, making it accessible for users to download and inadvertently install on their systems."
+ransomware,"A type of malware that encrypts a user's files, demanding payment (usually in cryptocurrency) for their release, often causing significant disruptions and data loss."
+miner virus,"Malware designed to hijack a computer's processing power to mine cryptocurrencies without the owner's consent, leading to system slowdowns and increased energy consumption."
+blended attack,"An attack that combines multiple methods or types of malware to exploit vulnerabilities, making it more challenging for security measures to detect and mitigate the threat."

@@ -1,0 +1,10 @@
+incidents,description
+MaliciousSoftware,"A segment of code written with malicious intent, which is designed to insert into a network, causing harm to the data, applications, or operating systems within the network, or disrupting the normal operation of the network. Malicious software events refer to cybersecurity incidents where malicious programs are deliberately created or disseminated on the network, resulting in business losses or societal harm."
+CyberAttacks,"Attacks on a network through technical means, leading to business losses or societal harm."
+DataSecurity,"The manipulation, forgery, leakage, or theft of data through technical or other means, resulting in business losses or societal harm."
+InformationContentSecurity,"The dissemination of harmful information through the network that endangers national security, social stability, public safety, and interests, resulting in business losses or societal harm."
+EquipmentAndFacilityFailures,"Business losses or societal harm caused by network malfunctions or damage to equipment and facilities due to disruption or interference."
+Non-compliantOperations,"Deliberate or accidental actions that damage network functionality, resulting in business losses or societal harm."
+SecurityVulnerabilities,"Weaknesses or vulnerabilities in the network that can be exploited by attackers. Once exploited, they may cause destruction to the network, leading to business losses or societal harm."
+AnomalousBehavior,"Instability of the network itself or unauthorized network access resulting in abnormal activities such as abnormal access or traffic, leading to business losses or societal harm."
+ForceMajeure,"Unforeseen events that impair the availability of the network, resulting in business losses or societal harm."

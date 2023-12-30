@@ -1,0 +1,12 @@
+terms,description
+data tampering,"The unauthorized modification or alteration of data, often with the intent to deceive or manipulate information within a system or database."
+data counterfeiting,"The creation and distribution of fake or fraudulent data, misrepresenting its origin or authenticity for malicious purposes."
+data breach,"The unauthorized access, acquisition, or disclosure of sensitive data, often resulting in the exposure of confidential information to unauthorized parties."
+social engineering,"The use of psychological manipulation and deceptive tactics to exploit human behavior and trick individuals into divulging sensitive information or performing actions that compromise security."
+data theft,"The unauthorized copying, retrieval, or transfer of data, often for the purpose of financial gain, espionage, or other malicious activities."
+data interception,"The unauthorized capture or monitoring of data as it travels over a network, allowing attackers to eavesdrop on communications or gain access to sensitive information."
+position detection,"The identification or tracking of the geographical location of a device or user, often through the exploitation of GPS or other location-based technologies."
+data poisoning,"The introduction of false or misleading data into a system, database, or dataset, with the intent to corrupt analysis, decision-making, or compromise the integrity of information."
+data abuse,"The misuse or unauthorized use of data for purposes that violate privacy, security, or ethical standards, often leading to negative consequences for individuals or organizations."
+privacy violation,"The infringement upon an individual's right to privacy, often involving the unauthorized collection, use, or disclosure of personal information."
+data loss,"The unintentional or unauthorized loss of data, often resulting from factors such as hardware failures, software errors, or human mistakes, leading to potential security and operational risks."
