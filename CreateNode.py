@@ -1,6 +1,5 @@
 import py2neo
 from py2neo import Node, NodeMatcher, Relationship
-import json
 from tqdm import tqdm
 import csv
 
@@ -89,3 +88,47 @@ def ThreatImport():
                     rel = Relationship(class_node, "include", new_node)
                     graph.create(rel)
 
+
+def SFRClassImport():
+    SFRClass_path = r"./DATA/SFR/class.csv"
+    with open(SFRClass_path, 'r', encoding='utf-8') as file:
+        total_lines = sum(1 for line in file)
+    with open(SFRClass_path, 'r', encoding='utf-8') as file:
+        csv_reader = csv.reader(file)
+        for row in tqdm(csv_reader, total=total_lines, desc="Processing SFRClass CSV"):
+            new_node = Node("SFRCLASS", name=row[0], FullName=row[1], description=row[2])
+            graph.create(new_node)
+
+
+def SFRFamilyImport():
+    SFRFamily_path = r"./DATA/SFR/family.csv"
+    with open(SFRFamily_path, 'r', encoding='utf-8') as file:
+        total_lines = sum(1 for line in file)
+    with open(SFRFamily_path, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        class_name = "FAU"
+        class_node = matcher.match("SFRCLASS", name=class_name).first()
+        if class_node is None:
+            print(f"No node found with name '{class_name}' in 'SFRCLASS'.")
+            return
+        for row in tqdm(reader, total=total_lines, desc="Processing SFR Family CSV"):
+            new_node = Node("SFRFAMILY", name=row[1], fullname=row[0], description=row[2])
+            graph.create(new_node)
+            if class_name != row[1][:3]:
+                print(class_name, "->", row[1][:3])
+                class_name = row[1][:3]
+                class_node = matcher.match("SFRCLASS", name=class_name).first()
+                if class_node is None:
+                    print(f"No node found with name '{class_name}' in 'SFRCLASS'.")
+                    return
+            rel = Relationship(class_node, "include", new_node)
+            graph.create(rel)
+
+
+def EalImport():
+    Eal_path = r"./DATA/Eal.csv"
+    with open(Eal_path, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            new_node = Node("EAL", name=row[0], function=row[1], Description=row[2])
+            graph.create(new_node)

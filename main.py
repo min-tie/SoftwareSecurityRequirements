@@ -12,4 +12,7 @@ if __name__ == '__main__':
     # ChartCreate.CVEChart(cve_path=cve_file_path)
     # CreateNode.LevelImport()  # 导入四个安全等级
     # CreateNode.ThreatClassImport()  # 导入9个威胁大类
-    CreateNode.ThreatImport()  # 导入威胁
+    # CreateNode.ThreatImport()  # 导入68种威胁
+    # CreateNode.SFRClassImport()  # 导入11种安全功能需求类
+    # CreateNode.SFRFamilyImport()  # 导入74个安全功能需求族
+    CreateNode.EalImport()
