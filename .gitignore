@@ -2,6 +2,7 @@
 venv/
 __pycache__/
 .idea/
+DATA/Resource/
 
 DATA/CVE.csv
 DATA/CWE.csv

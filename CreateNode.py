@@ -132,3 +132,23 @@ def EalImport():
         for row in reader:
             new_node = Node("EAL", name=row[0], function=row[1], Description=row[2])
             graph.create(new_node)
+
+
+def SARImport():
+    sar_path = r'./DATA/SAR/SAR.csv'
+    with open(sar_path, "r", encoding="utf-8") as file:
+        total_lines = sum(1 for line in file)
+    with open(sar_path, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        for row in tqdm(reader, total=total_lines, desc="Processing SAR csv"):
+            if row[0][:5] == "CLASS":
+                class_name = row[0][-3:]
+                print(f"\nimport Class {class_name}")
+                class_node = Node("SARCLASS", name=class_name, fullname=row[1], description=row[2])
+                graph.create(class_node)
+            else:
+                new_node = Node("SARFAMILY", name=row[0], fullname=row[1], descrip=row[2])
+                graph.create(new_node)
+                rel = Relationship(class_node, "include", new_node)
+                graph.create(rel)
+
