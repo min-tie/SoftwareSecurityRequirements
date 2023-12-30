@@ -152,3 +152,25 @@ def SARImport():
                 rel = Relationship(class_node, "include", new_node)
                 graph.create(rel)
 
+
+def AssetClassImport():
+    class_file_path = r"./DATA/Assets/class.csv"
+    with open(class_file_path, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            new_node = Node("ASSETCLASS", name=row[0], Description=row[1])
+            graph.create(new_node)
+
+
+def AssetFamilyImprot():
+    family_file_path = r"./DATA/Assets/family.csv"
+    with open(family_file_path, "r", encoding="utf-8") as file:
+        total_lines = sum(1 for line in file)
+    with open(family_file_path, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        for row in tqdm(reader, total=total_lines, desc="Processing Assets family csv"):
+            class_node = matcher.match("ASSETCLASS", name=row[0]).first()
+            new_node = Node("ASSETFAMILY", name=row[1], description=row[2])
+            graph.create(new_node)
+            rel = Relationship(class_node, "include", new_node)
+            graph.create(rel)
