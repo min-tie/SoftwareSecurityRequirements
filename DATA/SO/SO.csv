@@ -1,0 +1,17 @@
+Confidentiality,Ensure that sensitive information is only accessible to authorized entities.
+Integrity,Guarantee the accuracy and trustworthiness of data and information.
+Availability,Ensure that the system or product is accessible and operational when needed.
+Accountability,Establish mechanisms to trace and identify actions to specific users or entities.
+Authentication,Verify the identity of users or entities trying to access the system.
+Non-Repudiation,Prevent the denial of actions or transactions by ensuring that they can be traced to their origin.
+Access Control,Manage and restrict access to resources based on user roles and permissions.
+Data Protection,"Safeguard data from unauthorized access, alteration, or deletion."
+Secure Communication,Ensure the confidentiality and integrity of data during transmission.
+Auditability,Enable the logging and monitoring of security-relevant events for analysis.
+Minimization of Attack Surface,Reduce the exposure of the system by minimizing the number of entry points and potential vulnerabilities.
+Timeliness,Ensure that security-critical operations and responses occur within specified time frames.
+Risk Management,"Identify, assess, and manage risks to the security of the system or product"
+Resilience and Recovery,"Establish mechanisms to recover from security incidents and maintain operational resilience"
+Secure Update and Patch Management,Ensure that software and firmware updates are applied securely to address vulnerabilities"
+Cryptographic Security,Implement and maintain strong cryptographic controls to protect sensitive information
+Intrusion Detection and Prevention,"Implement mechanisms to detect and prevent unauthorized access and malicious activities"

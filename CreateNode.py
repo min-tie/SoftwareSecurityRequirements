@@ -8,28 +8,32 @@ import csv
 # 连接数据库
 graph = py2neo.Graph("neo4j://172.28.45.149:7687", auth=("neo4j", "password"))
 matcher = NodeMatcher(graph)
-cve_file_path = r'.\DATA\CVE.csv'
 
 
-def CVEImport(cve_file):
+def CVEImport():
     """
+    只处理最新的2000个漏洞
     导入CVE节点
     :return:
     """
-    with open(cve_file, 'r', encoding='utf-8') as file:
-        total_lines = sum(1 for line in file)
+    cve_file = r'.\DATA\CVE.csv'
+    latest = 2000
 
     # Reset the file pointer to the beginning
     with open(cve_file, 'r', encoding='utf-8') as file:
-        # Create a CSV reader
         csv_reader = csv.reader(file)
-
-        # Use tqdm for a progress bar
-        for row in tqdm(csv_reader, total=total_lines, desc="Processing CVE CSV"):
+        past = sum(1 for _ in csv_reader) - latest
+        # print(past)
+        for _ in range(past):
+            file.seek(0)
+            next(csv_reader)
+        for i, row in enumerate(tqdm(csv_reader, total=latest, desc="Processing CVE CSV")):
             # Process each row here
             # For example, print the first three columns
             new_node = Node("CVE", name=row[0], status=row[1], description=row[2])
             graph.create(new_node)
+            if i >= latest:
+                return
 
 
 def LevelImport():
@@ -132,7 +136,7 @@ def EalImport():
     with open(Eal_path, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         for row in reader:
-            new_node = Node("EAL", name=row[0], function=row[1], Description=row[2])
+            new_node = Node("EAL", name=row[0], function=row[1], description=row[2])
             graph.create(new_node)
 
 
@@ -145,7 +149,7 @@ def SARImport():
         for row in tqdm(reader, total=total_lines, desc="Processing SAR csv"):
             if row[0][:5] == "CLASS":
                 class_name = row[0][-3:]
-                print(f"\nimport Class {class_name}")
+                # print(f"\nimport Class {class_name}")
                 class_node = Node("SARCLASS", name=class_name, fullname=row[1], description=row[2])
                 graph.create(class_node)
             else:
@@ -160,7 +164,7 @@ def AssetClassImport():
     with open(class_file_path, "r", encoding="utf-8") as file:
         reader = csv.reader(file)
         for row in reader:
-            new_node = Node("ASSETCLASS", name=row[0], Description=row[1])
+            new_node = Node("ASSETCLASS", name=row[0], description=row[1])
             graph.create(new_node)
 
 
@@ -202,3 +206,12 @@ def OSPImport():
             graph.create(fam_node)
             rel = Relationship(class_node, "include", fam_node)
             graph.create(rel)
+
+
+def SOImport():
+    SO_path = r"./DATA/SO/SO.csv"
+    with open(SO_path, "r", encoding='utf-8') as file:
+        reader = csv.reader(file)
+    for row in reader:
+        new_node = Node("SO", name=row[0], description=row[1])
+        graph.create(new_node)
