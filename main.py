@@ -17,5 +17,6 @@ if __name__ == '__main__':
     # CreateNode.SFRFamilyImport()  # 导入74个安全功能需求族
     # CreateNode.EalImport()  # 导入7个评估等级
     # CreateNode.SARImport()  # 导入9个安全保障需求类和47个族
-    CreateNode.AssetClassImport()
-    CreateNode.AssetFamilyImprot()
+    # CreateNode.AssetClassImport() # 导入5个资产实体类
+    # CreateNode.AssetFamilyImprot() # 导入24个资产实体族
+    CreateNode.OSPImport()

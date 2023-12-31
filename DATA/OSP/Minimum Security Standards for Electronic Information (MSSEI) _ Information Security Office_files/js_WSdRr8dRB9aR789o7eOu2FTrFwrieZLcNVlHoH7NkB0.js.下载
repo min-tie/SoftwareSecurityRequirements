@@ -1,0 +1,1083 @@
+(function($) {
+  Drupal.behaviors.panopolyImagesModule = {
+    attach: function (context, settings) {
+      var captions = $('.caption', context).has('img');
+      $(captions).once('panopoly-images').imagesLoaded(function () {
+        panopolyImagesResizeCaptionBox(captions);
+      });
+
+      function panopolyImagesResizeCaptionBox(captions) {
+        captions.each(function() {
+          var imageSet = $('img', this),
+              imgBoxWidth = getImgWidth(imageSet),
+              wrapperBoxWidth =
+                  getWrapperSpacing($('.caption-inner', this))
+                + getWrapperSpacing($('.caption-width-container', this)),
+              totalWidth = imgBoxWidth + wrapperBoxWidth;
+          $(this).width(totalWidth);
+        });
+      }
+
+      // Get width of image plus margins, borders and padding
+      function getImgWidth(imageSet) {
+        var imgWidth = 0,
+            imgBoxExtra = 0,
+            testWidth = 0;
+        var attrWidth;
+
+        // We shouldn't have more than one image in a caption, but it would be
+        // possible, so we make sure we have the widest one
+        for (var i = 0; i < imageSet.length; i++) {
+          // If we have a hardcoded width attribute from manual resizing in
+          // TinMCE, use that. If not, use the image naturalWidth. We can't
+          // reliably use width() for responsive images.
+          attrWidth = $(imageSet[i]).attr("width");
+          if (typeof attrWidth !== 'undefined') {
+            // attr() returns a string. Must convert to int for math to work.
+            testWidth = parseInt(attrWidth, 10);
+          }
+          else {
+            testWidth = imageSet[i].naturalWidth;
+          }
+          if (testWidth > imgWidth) {
+            imgWidth = testWidth;
+            imgBoxExtra = getWrapperSpacing(imageSet[i])
+          }
+        }
+        return imgWidth + imgBoxExtra;
+      }
+
+      // We want the total of margin, border and padding on the element
+      function getWrapperSpacing(el) {
+        var spacing = ['margin-left', 'border-left', 'padding-left', 'padding-right', 'border-right', 'margin-right'],
+            totalPx = 0,
+            spacePx = 0,
+            spaceRaw = '';
+        for (var i = 0; i < spacing.length; i++) {
+          spaceRaw = $(el).css(spacing[i]);
+
+          // Themers might add padding, borders or margin defined in ems, but we can't
+          // add that to pixel dimensions returned by naturalWidth, so we just throw
+          // away anything but pixels. Themers have to deal with that.
+          if(spaceRaw && spaceRaw.substr(spaceRaw.length - 2) == 'px') {
+            spacePx = parseInt(spaceRaw, 10);
+            totalPx += ($.isNumeric(spacePx)) ? spacePx : 0;
+          }
+        }
+        return totalPx;
+      }
+    }
+  }
+})(jQuery);
+;
+(function ($) {
+    'use strict';
+    Drupal.behaviors.ACChangeEnterBehavior = {
+        attach: function (context, settings) {
+            $('input.form-autocomplete', context).once('ac-change-enter-behavior', function() {
+                $(this).keypress(function(e) {
+                    var ac = $('#autocomplete');
+                    if (e.keyCode == 13 && typeof ac[0] != 'undefined') {
+                        e.preventDefault();
+                        ac.each(function () {
+                            if(this.owner.selected == false){
+                                this.owner.selectDown();
+                            }
+                            this.owner.hidePopup();
+                        });
+                        $(this).trigger('change');
+                    }
+                });
+            });
+        }
+    };
+}(jQuery));
+;
+/**
+ * @file
+ * Javascript to support accessible expanding/collapsing content.
+ *
+ */
+
+(function ($) {
+
+Drupal.behaviors.openberkeley_faq = {
+  attach: function (context, settings) {
+
+    $('body').once('faq-content', function() {
+      $('div.faq-category-group.openberkeley-faq-hide-answer .faq-qa-header').first().after( '<div class="openberkeley-expand-all-links"><a class="openberkeley-collapsible-collapse" href="#">collapse all</a> <a class="openberkeley-collapsible-expand" href="#">expand all</a></div>' );
+      $('div.faq-category-group.openberkeley-faq-hide-answer .faq-qa').first().addClass( 'openberkeley-faq-clear-both' );
+
+    }); // End functions that only happen once.
+  }
+};
+
+})(jQuery);
+;
+/**
+ * @file
+ * Javascript for Open Berkeley Portfolio.
+ */
+
+(function ($) {
+  // Custom layout mode for isotope.
+  function initIsotopeLayoutMode(IsotopeLayoutMode) {
+    var FitRowsDetails = IsotopeLayoutMode.create('fitRowsDetails');
+
+    FitRowsDetails.prototype._resetLayout = function() {
+      this.x = 0;
+      this.y = 0;
+      this.maxY = 0;
+      this.index = 0;
+      this.indexHeights = [];
+      this._getMeasurement( 'gutter', 'outerWidth' );
+    };
+
+    FitRowsDetails.prototype._calculateIndexHeights = function () {
+      var containerWidth = this.isotope.size.innerWidth + this.gutter,
+          gutter = this.gutter,
+          indexHeights = [],
+          x = 0,
+          height = 0,
+          rowCount = 0;
+
+      $.each(this.isotope.filteredItems, function () {
+        var item = this;
+        if (!$(item.element).hasClass('openberkeley-portfolio-isotope-element-details')) {
+          item.getSize();
+          var itemWidth = item.size.outerWidth + gutter;
+          // if this element cannot fit in the current row
+          if ( x !== 0 && itemWidth + x > containerWidth ) {
+            for (var i = 0; i < rowCount; i++) {
+              indexHeights.push(height);
+            }
+            x = 0;
+            height = 0;
+            rowCount = 0;
+          }
+          x += itemWidth;
+          height = Math.max(height, item.size.innerHeight);
+          rowCount++;
+        }
+      });
+
+      // Add the items for the last row.
+      for (var i = 0; i < rowCount; i++) {
+        indexHeights.push(height);
+      }
+
+      return indexHeights;
+    };
+
+    FitRowsDetails.prototype._getItemLayoutPosition = function( item ) {
+      var position;
+
+      if (!$(item.element).hasClass('openberkeley-portfolio-isotope-element-details')) {
+        // Make all elements in row the height of the tallest item.
+        if (this.indexHeights.length === 0) {
+          this.indexHeights = this._calculateIndexHeights();
+        }
+        $(item.element).height(this.indexHeights[this.index++]);
+      }
+
+      item.getSize();
+
+      if ($(item.element).hasClass('openberkeley-portfolio-isotope-element-details')) {
+        position = {
+          x: 0,
+          y: this.maxY,
+        };
+        this.maxY += item.size.outerHeight;
+      }
+      else {
+        var itemWidth = item.size.outerWidth + this.gutter;
+        // if this element cannot fit in the current row
+        var containerWidth = this.isotope.size.innerWidth + this.gutter;
+        if ( this.x !== 0 && itemWidth + this.x > containerWidth ) {
+          this.x = 0;
+          this.y = this.maxY;
+        }
+
+        var position = {
+          x: this.x,
+          y: this.y
+        };
+
+        this.maxY = Math.max( this.maxY, this.y + item.size.outerHeight );
+        this.x += itemWidth;
+      }
+
+      return position;
+    };
+
+    FitRowsDetails.prototype._getContainerSize = function() {
+      return { height: this.maxY };
+    };
+
+    return FitRowsDetails;
+  }
+
+  // Store all isotope grids on the page by portfolio id.
+  var isotope_grids = {};
+
+  // Dynamically filter the available taxonomies on the node edit form.
+  function filterTaxonomyVocabularies(content_vocabularies) {
+    var taxonomyField = $('#edit-field-openberkeley-portfolio-tax-und,#edit-field-openberkeley-portfolio-pfb-und'),
+        contentTypes = [],
+        shown = false;
+
+    // Get the list of selected content types.
+    $('input[name^="field_openberkeley_portfolio_ct"]:checked').each(function () {
+      contentTypes.push(this.value);
+    });
+
+    // Hide all the taxonomy vocabulary and term options.
+    $('.form-type-radio', taxonomyField).hide();
+
+    // Loop through the content types and show the vocabularies on them.
+    $.each(contentTypes, function () {
+      var vocabularies = content_vocabularies[this];
+      if (!vocabularies) {
+        return;
+      }
+      $.each(vocabularies, function () {
+        $('.form-type-radio:has(input[value="' + this + '"])', taxonomyField).show();
+        shown = true;
+      });
+    });
+
+    // Always show the '_none' field on 'Pre-filter by'.
+    $('#edit-field-openberkeley-portfolio-pfb-und-none').closest('.form-type-radio').show();
+  }
+
+  // Dynamically filter the available taxonomy terms on the node edit form.
+  function filterTaxonomyTerms() {
+    var filterName = $('input[name^="field_openberkeley_portfolio_pfb"]:checked').val(),
+        termField = $('#edit-field-openberkeley-portfolio-pff-und');
+
+    $('option', termField).hide();
+    $('option[value^="' + filterName + ':"]', termField).show();
+  }
+
+  // Smooth scroll the window to a particular offset.
+  function windowScrollTo(offset) {
+    var scrollTop = $(window).scrollTop();
+    // On Firefox, we get this weird bounce when scrolling to
+    // almost the same position, so we use a deadzone of 20 pixels.
+    if (scrollTop < offset - 10 || scrollTop > offset + 10) {
+      $('html, body').animate({
+        scrollTop: offset,
+      }, 500);
+    }
+  }
+
+  // A factory method for isotope filter functions.
+  function createIsotopeFilter(grid, filter, limit) {
+    return function () {
+      // Get the item's index relative to it's filtered siblings.
+      var index = $('.openberkeley-portfolio-isotope-element', grid).filter(filter).index(this);
+      return $(this).is(filter) && index !== -1 && index < limit;
+    };
+  }
+
+  // Dynamically filter the available sort by fields on the node edit form.
+  function filterDefaultSort(sort_by_fields) {
+    var sortFields = $('input[name="field_openberkeley_portfolio_sby[und]"][value^="field_"]'),
+        sortValue = sortFields.filter(':checked').val(),
+        contentTypes = [],
+        contentTypeFields = [];
+
+    // Get the list of selected content types.
+    $('input[name^="field_openberkeley_portfolio_ct"]:checked').each(function () {
+      contentTypes.push(this.value);
+    });
+
+    // Loop through the content types and accumulate the list of fields.
+    if (contentTypes.length > 0) {
+      contentTypeFields = sort_by_fields[contentTypes[0]];
+      $.each(contentTypes, function () {
+        var fields = sort_by_fields[this];
+        if (!fields || fields.length === 0) {
+          contentTypeFields = [];
+          return;
+        }
+        contentTypeFields = $.grep(contentTypeFields, function (x) {
+          return $.inArray(x, fields) !== -1;
+        });
+      });
+    }
+
+    // Hide all sort fields.
+    sortFields.closest('.form-item').hide();
+
+    // Show the fields that should be shown for the contents.
+    $.each(contentTypeFields, function () {
+      sortFields.filter('input[value="' + this + '"]').closest('.form-item').show();
+    });
+
+    // If the selected value isn't in this list, we uncheck it.
+    if (sortValue && !sortFields.filter('input[value="' + sortValue + '"]').is(':visible')) {
+      sortFields.filter(':checked').prop('checked', false);
+    }
+  }
+
+  Drupal.behaviors.openberkeley_portfolio = {
+    attach: function (context, settings) {
+      if (typeof window.Isotope !== 'undefined' && typeof window.Isotope.LayoutMode.modes['fitRowDetails'] === 'undefined') {
+        initIsotopeLayoutMode(window.Isotope.LayoutMode);
+      }
+      var settings = settings.openberkeley_portfolio || {},
+          limit = settings.limit || 120;
+
+      // Setup the isotope grid.
+      $('.openberkeley-portfolio-isotope-grid', context)
+        .once('openberkeley-portfolio')
+        .each(function () {
+          var portfolioId = $(this).attr('data-portfolio-id'),
+              isotope = $(this).show().isotope({
+                layoutMode: 'fitRowsDetails',
+                itemSelector: '.openberkeley-portfolio-isotope-element',
+                filter: createIsotopeFilter(this, $(this).attr('data-current-filter'), limit),
+              });
+          isotope_grids[portfolioId] = isotope;
+
+          // If this is an expending grid, add some extra behaviors.
+          if ($('.openberkeley-portfolio-isotope-element-details', this).length > 0) {
+            // Rewrite and disable default behavior of trigger links in card elements.
+            $('.openberkeley-portfolio-isotope-element:not(.openberkeley-portfolio-isotope-element-details) a')
+              .attr('aria-expanded', 'false')
+              .attr('href', '#')
+              .click(function (evt) {
+                evt.preventDefault();
+              });
+
+            // In the details elements, remove the title link.
+            $('.openberkeley-portfolio-isotope-element-details h3 > a').contents().unwrap();
+
+            // Scroll to top of focused grid item, and add 'focus' class.
+            $('.openberkeley-portfolio-isotope-element', this)
+              .focusin(function () {
+                if (!$(this).hasClass('focus')) {
+                  if (!$(this).hasClass('openberkeley-portfolio-isotope-element-details')) {
+                    windowScrollTo($(this).offset().top);
+                  }
+                  $(this).addClass('focus');
+                }
+              })
+              .focusout(function () {
+                $(this).removeClass('focus');
+              });
+
+            // Expand details when normal 'element' is interacted with.
+            var expand_grid_element = function (element) {
+              var nid = $(element).attr('data-nid'),
+                  grid = $(element).closest('.openberkeley-portfolio-isotope-grid'),
+                  current_filter = grid.attr('data-current-filter'),
+                  is_expanded = $(element).hasClass('openberkeley-portfolio-isotope-element-expanded'),
+                  previously_expanded,
+                  offset;
+
+              if (grid) {
+                if (!is_expanded) {
+                  previously_expanded = $('.openberkeley-portfolio-isotope-element-expanded', grid);
+
+                  // Scroll to where the the top of the parent element _will_ be.
+                  offset = $(element).offset().top;
+                  if (previously_expanded.length > 0 && previously_expanded.offset().top < offset) {
+                    // If there was a previously expanded element before the
+                    // one that's about to be expanded, we need to subtract
+                    // the height of the details element so we scroll to the 
+                    // correct positions after the animation to hide it
+                    // completes.
+                    offset -= $('.openberkeley-portfolio-isotope-element-details:visible', grid).outerHeight(true);
+                  }
+                  windowScrollTo(offset);
+
+                  previously_expanded
+                    .removeClass('openberkeley-portfolio-isotope-element-expanded')
+                    .removeClass('focus');
+                  $(element)
+                    .addClass('openberkeley-portfolio-isotope-element-expanded')
+                    .addClass('focus');
+                  $('.openberkeley-portfolio-isotope-element:not(.openberkeley-portfolio-isotope-element-details) a').attr('aria-expanded', 'false');
+                  $(element).find('a').attr('aria-expanded', 'true');
+
+                  current_filter = current_filter ? current_filter + ', ' : '';
+                  current_filter += '.openberkeley-portfolio-isotope-element-details-' + nid;
+                }
+                else {
+                  $(element).removeClass('openberkeley-portfolio-isotope-element-expanded');
+                  $(element).find('a').attr('aria-expanded', 'false');
+
+                  current_filter = current_filter.replace('.openberkeley-portfolio-isotope-element-details-' + nid, '')
+                  current_filter = current_filter.replace(/, $/, '')
+                }
+
+                grid.isotope({
+                  filter: createIsotopeFilter(grid, current_filter, limit),
+                });
+              }
+            };
+
+            // Expand details when normal element is clicked or ENTER is pressed.
+            $('.openberkeley-portfolio-isotope-element:not(.openberkeley-portfolio-isotope-element-details)', this)
+              .mousedown(function (evt) {
+                expand_grid_element(this);
+              })
+              .keydown(function (evt) {
+                if (evt.which == 13) {
+                  expand_grid_element(this);
+                }
+              });
+          }
+        });
+
+      // Setup the isotope filter.
+      $('.openberkeley-portfolio-isotope-filter', context)
+        .once('openberkeley-portfolio')
+        .on('click', 'button', function() {
+          var filterValue = $(this).attr('data-filter'),
+              filterText = $(this).text(),
+              filterSet = $(this).closest('.openberkeley-portfolio-isotope-filter'),
+              portfolioId = filterSet.attr('data-portfolio-id'),
+              announcement = 'Showing ' + filterText + ' items.',
+              grid = isotope_grids[portfolioId];
+
+          if (grid) {
+            grid.isotope({
+              filter: createIsotopeFilter(grid, filterValue, limit)
+            });
+
+            // Adjust selected.
+            $(this).addClass('selected').siblings().removeClass('selected');
+            $(this).attr('aria-current', 'true').siblings().removeAttr('aria-current');
+
+            // Remove 'expanded' class to deselect anything that might be expanded.
+            $('.openberkeley-portfolio-isotope-element', grid).removeClass('openberkeley-portfolio-isotope-element-expanded')
+
+            // Put filter on grid.
+            grid.attr('data-current-filter', filterValue);
+          }
+          // Announce the filter has been applied.
+          Drupal.announce(announcement);
+
+          return false;
+        })
+        .each(function () {
+          // Mark the first button as selected.
+          $(':first-child', this).addClass('selected');
+          $(':first-child', this).attr('aria-current', 'true');
+        });
+
+      // Setup the dynamical filter of the available taxonomies if the settings
+      // are available.
+      if (settings.content_vocabularies) {
+        $('input[name^="field_openberkeley_portfolio_ct"]', context)
+          .once('openberkeley-portfolio-content-vocabularies')
+          .change(function () {
+            filterTaxonomyVocabularies(settings.content_vocabularies);
+          });
+
+        filterTaxonomyVocabularies(settings.content_vocabularies);
+      }
+
+      // Setup the dynamical filter of the default sorts if the settings are
+      // available.
+      if (settings.sort_by_fields) {
+        $('input[name^="field_openberkeley_portfolio_ct"]', context)
+          .once('openberkeley-portfolio-sort-by-fields')
+          .change(function () {
+            filterDefaultSort(settings.sort_by_fields);
+          });
+
+        filterDefaultSort(settings.sort_by_fields);
+      }
+
+      // Setup the dynamical filter of the pre-filter terms.
+      $('input[name^="field_openberkeley_portfolio_pfb"]', context)
+        .once('openberkeley-portfolio')
+        .change(function () {
+          filterTaxonomyTerms();
+          $('#edit-field-openberkeley-portfolio-pff-und').val('_none');
+        });
+
+      filterTaxonomyTerms();
+
+      // Setup automatic count updating if it's available on the form.
+      $('#edit-openberkeley-portfolio-count', context)
+        .once('openberkeley-portfolio-count')
+        .each(function () {
+          var update_btn = $('input[value="Update"]', this);
+
+          // Hide the update button.
+          update_btn.hide();
+          if (window.location.pathname !== '/node/add/openberkeley-portfolio-page') {
+            update_btn.mousedown();
+          }
+
+          // Trigger it any time one of the portfolio fields changes.
+          $('input[name^="field_openberkeley_portfolio_"],select[name^="field_openberkeley_portfolio_"]')
+            .change(function () {
+              update_btn.mousedown();
+            });
+          
+          // Ask about submission if the count is over 50.
+          $('#edit-submit').click(function () {
+            var count = parseInt($('#openberkeley-portfolio-count').text());
+            if (count > 50) {
+              var message = "For performance reasons, we recommend that portfolios not return more than 50 items for display."
+              message += " This portfolio would return " + count + " items."
+              message += " You can use a pre-filter to reduce the number of items.";
+              message += " Save anyway?";
+              return confirm(message);
+            }
+          });
+        });
+    }
+  };
+})(jQuery);
+;
+/**
+ * @file
+ * Javascript to support accessible expanding/collapsing content.
+ *
+ */
+
+(function ($) {
+
+Drupal.behaviors.openberkeley_theme = {
+  attach: function (context, settings) {
+
+    // Set show/hide text variables.
+    // Not configurable by the end-user.
+    var textShow = " (expand)";
+    var textHide = " (collapse)";
+    var iconShowClass = "fa-plus";
+    var iconHideClass = "fa-minus";
+    var statusLink;
+
+  // Helper functions.
+  function toggleCollapse(toggleStatus) {
+    if (toggleStatus === 'true') {
+      // Set toggle to collapse all state.
+      $('a.openberkeley-collapsible-collapse').show();
+      $('a.openberkeley-collapsible-expand').hide();
+      $('a.openberkeley-collapsible-trigger').attr('aria-expanded','true');
+      $('a.openberkeley-collapsible-trigger').each(function() {
+        statusLink = $(this).find('.openberkeley-collapsible-status');
+        $(statusLink).find('.element-invisible').text(textHide);
+        $(statusLink).find('> span').removeClass(iconShowClass);
+        $(statusLink).find('> span').addClass(iconHideClass);
+      });
+    } else if (toggleStatus === 'false') {
+      // Set toggle to expand all state.
+      $('a.openberkeley-collapsible-expand').show();
+      $('a.openberkeley-collapsible-collapse').hide();
+      $('a.openberkeley-collapsible-trigger').attr('aria-expanded','false');
+      $('a.openberkeley-collapsible-trigger').each(function() {
+        statusLink = $(this).find('.openberkeley-collapsible-status');
+        $(statusLink).find('.element-invisible').text(textShow);
+        $(statusLink).find('> span').removeClass(iconHideClass);
+        $(statusLink).find('> span').addClass(iconShowClass);
+      });
+    }
+  }
+
+    // The following actions should only happen once.
+    $('body').once('openberkeley-collapsible', function() {
+
+      // Hide all expand targets.
+      $('.openberkeley-collapsible-target, a.openberkeley-collapsible-collapse').hide();
+    
+      // Wrap the contents of the controllers in links.
+      $('h2.openberkeley-collapsible-controller, h3.openberkeley-collapsible-controller, h4.openberkeley-collapsible-controller, h5.openberkeley-collapsible-controller').wrapInner( "<a href=\"#details\" class=\"openberkeley-collapsible-trigger\"></a>" );
+
+      // Set aria-expanded on all triggers.
+      $('a.openberkeley-collapsible-trigger, a.openberkeley-collapsible-expand').attr('aria-expanded', 'false');
+      $('a.openberkeley-collapsible-collapse').attr('aria-expanded', 'true');
+
+      // Set show/hide text.
+      $('a.openberkeley-collapsible-trigger').append( ' <span class="openberkeley-collapsible-status"><span class="fa ' + iconShowClass + '"><span class="element-invisible">' + textShow + '</span></span></span>' );
+
+      // Add IDs to containers.
+      $('.openberkeley-collapsible-container').each(function (i) {
+        $(this).attr('id','openberkeley-collapsible-container-' + i);
+      });
+
+      // Add IDs to triggers.
+      $('.openberkeley-collapsible-trigger').each(function() {
+        var parentId = $(this).closest('.openberkeley-collapsible-container').attr('id');
+        $(this).attr('id', parentId + '-trigger');
+      });
+
+      // Add IDs to targets.
+      $('.openberkeley-collapsible-target').each(function() {
+        var parentId = $(this).closest('.openberkeley-collapsible-container').attr('id');
+        $(this).attr('id', parentId + '-target');
+      });
+
+      // Add aria properties to info targets.
+      $('.openberkeley-collapsible-info-target').each(function() {
+        var infoId = $(this).closest('.openberkeley-collapsible-container').find('.openberkeley-collapsible-trigger').attr('id');
+        $(this).attr('aria-describedby', infoId);
+      });
+
+      // Add aria properties to triggers.
+      $('a.openberkeley-collapsible-trigger').each(function() {
+        $(this).attr('aria-expanded', 'false');
+        var targetId = $(this).closest('.openberkeley-collapsible-container').find('.openberkeley-collapsible-target').attr('id');
+        $(this).attr('aria-controls', targetId);
+        $(this).attr('href', '#' + targetId);
+      });
+
+      // Get a list of all the target IDs for aria-controls.
+      var targetIds = $.map($(".openberkeley-collapsible-target"), function(n, i) {
+        return n.id;
+      });
+      var controlIds = targetIds.join(' ');
+      var firstTargetId = $('body').find('.openberkeley-collapsible-target').attr('id');
+
+      // Make IDs of expand/collapse sections unique.
+      $('div#openberkeley-expand-all,div.openberkeley-expand-all-links').each(function (i) {
+        $(this).attr('id','openberkeley-expand-all-' + i);
+        $(this).addClass('openberkeley-expand-all-links');
+        $(this).find('a.openberkeley-collapsible-collapse').attr('href', '#openberkeley-expand-all-' + i)
+      });
+
+      // Add aria-controls and href to expand all.
+      $('a.openberkeley-collapsible-expand').attr('aria-controls', controlIds);
+      $('a.openberkeley-collapsible-expand').attr('href', '#' + firstTargetId);
+
+      // Add Drupal clearfix class (OPENUCB-2076)
+      $('.openberkeley-collapsible-target').addClass("clearfix");
+
+    }); // End functions that only happen once.
+
+    // Handle clicks - prevent default action first.
+    $('a.openberkeley-collapsible-trigger').click(function(event) {
+      event.preventDefault();
+      var target = $('#' + $(this).attr('aria-controls'));
+      target.slideToggle();
+      $(this).attr('aria-expanded',$(this).attr('aria-expanded') == 'true' ? 'false' : 'true');
+      var expandedStatus = $(this).attr('aria-expanded');
+      statusLink = $(this).find('.openberkeley-collapsible-status');
+      $(statusLink).find('.element-invisible').text(expandedStatus == 'true' ? textHide : textShow);
+      $(statusLink).find('> span').removeClass();
+      $(statusLink).find('> span').addClass(function() {
+        newClass = expandedStatus == 'true' ? iconHideClass : iconShowClass;
+        return "fa " + newClass;
+      });
+      // If all items are manually set to expanded or collapsed, then the global
+      // toggle may be out of sync. Check for this condition and update the toggle.
+
+      // Get the expand/collapse status of all items into an array.
+      var itemsExpandedStatus = [];
+      $('a.openberkeley-collapsible-trigger').each(function(){
+        itemsExpandedStatus.push($(this).attr('aria-expanded'));
+      });
+      // Check if all items in the array are the same.
+      var toggleStatus = itemsExpandedStatus.reduce(function(a, b){return (a === b)?a:false;});
+      if (toggleStatus) {
+        toggleCollapse(toggleStatus);
+      }
+    });
+
+    // Collapse all.
+    $('a.openberkeley-collapsible-collapse').click(function(event) {
+      event.preventDefault();
+      $('.openberkeley-collapsible-target').hide();
+      toggleCollapse('false');
+      $(this).parent().find('a.openberkeley-collapsible-expand').focus();
+    });
+
+    // Expand all.
+    $('a.openberkeley-collapsible-expand').click(function(event) {
+      event.preventDefault(); 
+      $('.openberkeley-collapsible-target').show();
+      toggleCollapse('true');
+      $(this).parent().find('a.openberkeley-collapsible-collapse').focus();
+    });
+  }
+};
+
+})(jQuery);
+;
+(function ($) {
+  var twitterBackup = {};
+
+  // Hack to make the twttr.ready() function available before the script has
+  // loaded. This was inspired from this snippet in the Twitter docs:
+  //   https://dev.twitter.com/web/javascript/loading
+  if (typeof twttr === 'undefined') {
+    twttr = {
+      _e: [],
+      ready: function (f) {
+        twttr._e.push(f);
+      }
+    };
+  }
+
+  // Bind to the Twitter widgets load event to add some custom CSS.
+  twttr.ready(function () {
+    twttr.events.bind('rendered', function (evt) {
+      if (!evt.target.src) {
+        $(evt.target).contents().find(".timeline").attr("style","max-width: 100% !important;");
+        $(evt.target).attr("style","max-width: 100% !important; width: 100% !important;");
+      }
+    });
+  });
+})(jQuery);
+;
+(function ($) {
+  Drupal.behaviors.openberkeley_wysiwyg_override = {
+    attach: function (context, settings) {
+      $('img[usemap]', context).maphilight({ stroke: false, fillColor: 'FFFFFF',fillOpacity: 0.3 });
+    }
+  };
+})(jQuery);
+;
+(function ($) {
+  Drupal.behaviors.panopolyMagic = {
+    attach: function (context, settings) {
+      /**
+       * Title Hax for Panopoly
+       *
+       * Replaces the markup of a node title pane with
+       * the h1.title page element
+       */
+      if ($.trim($('.pane-node-title .pane-content').html()) == $.trim($('h1.title').html())) {
+        $('.pane-node-title .pane-content').html('');
+        $('h1.title').hide().clone().prependTo('.pane-node-title .pane-content');
+        $('.pane-node-title h1.title').show();
+      }
+    }
+  };
+})(jQuery);
+
+(function ($) {
+  // Used to only update preview after changes stop for a second.
+  var timer;
+
+  // Used to make sure we don't wrap Drupal.wysiwygAttach() more than once.
+  var wrappedWysiwygAttach = false;
+
+  // Used to make sure we don't wrap insertLink() on the Linkit field helper
+  // more than once.
+  var wrappedLinkitField = false;
+
+  // Triggers the CTools autosubmit on the given form. If timeout is passed,
+  // it'll set a timeout to do the actual submit rather than calling it directly
+  // and return the timer handle.
+  function triggerSubmit(form, timeout) {
+    var $form = $(form),
+        preview_widget = $('#panopoly-form-widget-preview'),
+        submit;
+    if (!preview_widget.hasClass('panopoly-magic-loading')) {
+      preview_widget.addClass('panopoly-magic-loading');
+      submit = function () {
+        if (document.contains(form)) {
+          $form.find('.ctools-auto-submit-click').click();
+        }
+      };
+      if (typeof timeout === 'number') {
+        return setTimeout(submit, timeout);
+      }
+      else {
+        submit();
+      }
+    }
+  }
+
+  // Used to cancel a submit. It'll clear the timer and the class marking the
+  // loading operation.
+  function cancelSubmit(form, timer) {
+    var $form = $(form),
+        preview_widget = $('#panopoly-form-widget-preview');
+    preview_widget.removeClass('panopoly-magic-loading');
+    clearTimeout(timer);
+  }
+
+  function onWysiwygChangeFactory(editorId) {
+    return function () {
+      var textarea = $('#' + editorId),
+          form = textarea.get(0).form;
+
+      if (textarea.hasClass('panopoly-textarea-autosubmit')) {
+        // Wait a second and then submit.
+        cancelSubmit(form, timer); 
+        timer = triggerSubmit(form, 1000);
+      }
+    };
+  }
+
+  // A function to run before Drupal.wysiwyg.editor.attach.tinymce() with the
+  // same arguments.
+  function wysiwygTinymceBeforeAttach(context, params, settings) {
+    var onWysiwygChange = onWysiwygChangeFactory(params.field);
+    settings['setup'] = function (editor) {
+      editor.onChange.add(onWysiwygChange);
+      editor.onKeyUp.add(onWysiwygChange);
+    };
+  }
+
+  // A function to run before Drupal.wysiwyg.editor.attach.markitup() with the
+  // same arguments.
+  function wysiwygMarkitupBeforeAttach(context, params, settings) {
+    var onWysiwygChange = onWysiwygChangeFactory(params.field);
+    $.each(['afterInsert', 'onEnter'], function (index, funcName) {
+      settings[funcName] = onWysiwygChange;
+    });
+  }
+
+  // Used to wrap a function with a beforeFunc (we use it for wrapping
+  // Drupal.wysiwygAttach()).
+  function wrapFunctionBefore(parent, name, beforeFunc) {
+    var originalFunc = parent[name];
+    parent[name] = function () {
+      beforeFunc.apply(this, arguments);
+      return originalFunc.apply(this, arguments);
+    };
+  }
+
+  // Used to wrap a function with an afterFunc (we use it for wrapping
+  // insertLink() on the Linkit field helper);
+  function wrapFunctionAfter(parent, name, afterFunc) {
+    var originalFunc = parent[name];
+    parent[name] = function () {
+      var retval = originalFunc.apply(this, arguments);
+      afterFunc.apply(this, arguments);
+      return retval;
+    };
+  }
+
+  /**
+   * Improves the Auto Submit Experience for CTools Modals
+   */
+  Drupal.behaviors.panopolyMagicAutosubmit = {
+    attach: function (context, settings) {
+      // Move focus to preview after it's shown.
+      $('body').once(function () {
+        if (typeof Drupal.CTools !== 'undefined' && typeof Drupal.CTools.Modal !== 'undefined' && typeof Drupal.CTools.Modal.modal_display) {
+          var modal_display = Drupal.CTools.Modal.modal_display;
+          Drupal.CTools.Modal.modal_display = function (ajax, response, status) {
+            var url = ajax.url,
+                params = {},
+                widget_name;
+
+            // Do the parent operation.
+            modal_display(ajax, response, status);
+
+            // Parse the GET arguments.
+            url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+              params[key] = value;
+            })
+            if (params['panopoly_magic_preview'] == 'manual') {
+              widget_name = decodeURIComponent(params['preview_panes']).split(',').pop();
+              widget_name.replace(':', '-');
+              widget_name.replace(/[^a-zA-Z0-9_]/g, '');
+              // Need to defer until current set of behaviors is done, because Panels
+              // will move the focus to the first widget by default.
+              setTimeout(function () {
+                $('#modal-content .panopoly-magic-preview-' + widget_name + ' :focusable:first').focus();
+              }, 0);
+            }
+            else if (params['panopoly_magic_preview'] == 'single') {
+              // Ditto.
+              setTimeout(function () {
+                $('#modal-content .panopoly-magic-preview :focusable:first').focus();
+              }, 0);
+            }
+          };
+        }
+      });
+
+      // Replaces click with mousedown for submit so both normal and ajax work.
+      $('.ctools-auto-submit-click', context)
+      .click(function(event) {
+        if ($(this).hasClass('ajax-processed')) {
+          event.stopImmediatePropagation();
+          $(this).trigger('mousedown');
+          return false;
+        }
+      });
+
+      // e.keyCode: key
+      var discardKeyCode = [
+        16, // shift
+        17, // ctrl
+        18, // alt
+        20, // caps lock
+        33, // page up
+        34, // page down
+        35, // end
+        36, // home
+        37, // left arrow
+        38, // up arrow
+        39, // right arrow
+        40, // down arrow
+         9, // tab
+        13, // enter
+        27  // esc
+      ];
+
+      // Special handling for link field widgets. This ensures content which is ahah'd in still properly autosubmits.
+      $('.field-widget-link-field input:text', context).addClass('panopoly-textfield-autosubmit').addClass('ctools-auto-submit-exclude');
+
+      // Handle text fields and textareas.
+      $('.panopoly-textfield-autosubmit, .panopoly-textarea-autosubmit', context)
+      .once('ctools-auto-submit')
+      .bind('keyup blur', function (e) {
+        var $element;
+        $element = $('.panopoly-magic-preview .pane-title', context);
+
+        cancelSubmit(e.target.form, timer);
+
+        // Filter out discarded keys.
+        if (e.type !== 'blur' && $.inArray(e.keyCode, discardKeyCode) > 0) {
+          return;
+        }
+
+        // Set a timer to submit the form a second after the last activity.
+        timer = triggerSubmit(e.target.form, 1000);
+      });
+
+      // Handle WYSIWYG fields.
+      if (!wrappedWysiwygAttach && typeof Drupal.wysiwyg != 'undefined' && typeof Drupal.wysiwyg.editor.attach.tinymce == 'function' && typeof Drupal.wysiwyg.editor.attach.markitup == 'function') {
+        wrapFunctionBefore(Drupal.wysiwyg.editor.attach, 'tinymce', wysiwygTinymceBeforeAttach);
+        //wrapFunctionBefore(Drupal.wysiwyg.editor.attach, 'markitup', wysiwygMarkitupBeforeAttach);
+        wrappedWysiwygAttach = true;
+
+        // Since the Drupal.behaviors run in a non-deterministic order, we can
+        // never be sure that we wrapped Drupal.wysiwygAttach() before it was
+        // used! So, we look for already attached editors so we can detach and
+        // re-attach them.
+        $('.panopoly-textarea-autosubmit', context)
+        .once('panopoly-magic-wysiwyg')
+        .each(function () {
+          var editorId = this.id,
+              instance = Drupal.wysiwyg.instances[editorId],
+              format = instance ? instance.format : null,
+              trigger = instance ? instance.trigger : null;
+
+          if (instance && instance.editor != 'none') {
+            params = Drupal.settings.wysiwyg.triggers[trigger];
+            if (params) {
+              Drupal.wysiwygDetach(context, params[format]);
+              Drupal.wysiwygAttach(context, params[format]);
+            }
+          }
+        });
+      }
+  
+      // Handle autocomplete fields.
+      $('.panopoly-autocomplete-autosubmit', context)
+      .once('ctools-auto-submit')
+      .bind('keyup blur', function (e) {
+        // Detect when a value is selected via TAB or ENTER.
+        if (e.type === 'blur' || e.keyCode === 13) {
+          // We defer the submit call so that it happens after autocomplete has
+          // had a chance to fill the input with the selected value.
+          triggerSubmit(e.target.form, 0);
+        }
+      });
+
+      // Prevent ctools auto-submit from firing when changing text formats.
+      $(':input.filter-list').addClass('ctools-auto-submit-exclude');
+
+      // Handle Linkit fields.
+      if (!wrappedLinkitField && typeof Drupal.linkit !== 'undefined') {
+        var linkitFieldHelper = Drupal.linkit.getDialogHelper('field');
+        if (typeof linkitFieldHelper !== 'undefined') {
+          wrapFunctionAfter(linkitFieldHelper, 'insertLink', function (data) {
+            var element = document.getElementById(Drupal.settings.linkit.currentInstance.source);
+            triggerSubmit(element.form);
+          });
+          wrappedLinkitField = true;
+        }
+      }
+
+    }
+  }
+})(jQuery);
+;
+(function ($) {
+
+  Drupal.behaviors.PanelsAccordionStyle = {
+    attach: function (context, settings) {
+      for (region_id in Drupal.settings.accordion) {
+        var accordion = Drupal.settings.accordion[region_id];
+        if (jQuery('#'+region_id).hasClass("ui-accordion")) {
+          jQuery('#'+region_id).accordion("refresh");
+        } else {
+          jQuery('#'+region_id).accordion(accordion.options);
+        }
+      }
+    }
+  };
+
+})(jQuery);
+;
+/**
+ * @file
+ * JavaScript integrations between the Caption Filter module and particular
+ * WYSIWYG editors. This file also implements Insert module hooks to respond
+ * to the insertion of content into a WYSIWYG or textarea.
+ */
+(function ($) {
+
+$(document).bind('insertIntoActiveEditor', function(event, options) {
+  if (options['fields']['title'] && Drupal.settings.captionFilter.widgets[options['widgetType']]) {
+    options['content'] = '[caption caption="' + options['fields']['title'].replace(/"/g, '\\"') + '"]' + options['content'] + '[/caption]';
+  }
+});
+
+Drupal.captionFilter = Drupal.captionFilter || {};
+
+Drupal.captionFilter.toHTML = function(co, editor) {
+  return co.replace(/(?:<p>)?\[caption([^\]]*)\]([\s\S]+?)\[\/caption\](?:<\/p>)?[\s\u00a0]*/g, function(a,b,c){
+    var id, cls, w, tempClass;
+
+    b = b.replace(/\\?'|\\&#39;|\\&#039;/g, '&#39;').replace(/\\"|\\&quot;/g, '&quot;');
+    c = c.replace(/\\&#39;|\\&#039;/g, '&#39;').replace(/\\&quot;/g, '&quot;');
+    id = b.match(/id=['"]([^'"]+)/i);
+    cls = b.match(/align=['"]([^'"]+)/i);
+    ct = b.match(/caption=['"]([^'"]+)/i);
+    w = c.match(/width=['"]([0-9]+)/);
+
+    id = ( id && id[1] ) ? id[1] : '';
+    cls = ( cls && cls[1] ) ? 'caption-' + cls[1] : '';
+    ct = ( ct && ct[1] ) ? ct[1].replace(/\\\\"/,'"') : '';
+    w = ( w && w[1] ) ? parseInt(w[1])+'px' : 'auto';
+
+    if (editor == 'tinymce')
+      tempClass = (cls == 'caption-center') ? 'mceTemp mceIEcenter' : 'mceTemp';
+    else if (editor == 'ckeditor')
+      tempClass = (cls == 'caption-center') ? 'mceTemp mceIEcenter' : 'mceTemp';
+    else
+      tempClass = '';
+
+    if (ct) {
+      return '<div class="caption ' + cls + ' ' + tempClass + ' draggable"><div class="caption-width-container" style="width: ' + w + '"><div class="caption-inner">' + c + '<p class="caption-text">' + ct + '</p></div></div></div><br />';
+    }
+    else {
+      return '<div class="caption ' + cls + ' ' + tempClass + ' draggable"><div class="caption-width-container" style="width: ' + w + '"><div class="caption-inner">' + c + '</div></div></div><br />';
+    }
+  });
+};
+
+Drupal.captionFilter.toTag = function(co) {
+  return co.replace(/(<div class="caption [^"]*">)\s*<div[^>]+>\s*<div[^>]+>(.+?)<\/div>\s*<\/div>\s*<\/div>\s*/gi, function(match, captionWrapper, contents) {
+    var align;
+    align = captionWrapper.match(/class=.*?caption-(left|center|right)/i);
+    align = (align && align[1]) ? align[1] : '';
+    caption = contents.match(/\<p class=\"caption-text\"\>(.*)\<\/p\>/);
+    caption_html = (caption && caption[0]) ? caption[0] : '';
+    caption = (caption && caption[1]) ? caption[1].replace(/"/g, '\\"') : '';
+    contents = contents.replace(caption_html, '');
+
+    return '[caption' + (caption ? (' caption="' + caption + '"') : '') + (align ? (' align="' + align + '"') : '') + ']' + contents + '[/caption]';
+  });
+};
+
+})(jQuery);
+;

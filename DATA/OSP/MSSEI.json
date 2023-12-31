@@ -1,0 +1,185 @@
+[
+  {
+    "class": "Managed Software Inventory",
+    "description": "Attackers use and deploy malicious software to gain unauthorized access to systems and sensitive data.  When software on a device is not required for business purposes, it unnecessarily introduces potential vulnerabilities, thereby increasing the likelihood of compromise.",
+    "family": [
+      [
+        "Managed software inventory",
+        "Resource Custodians must manage and regularly review installed software, and install only software packages required for business purposes."
+      ]
+    ]
+  },
+  {
+    "class": "Secure Device Configurations",
+    "description": "Resource Custodians must manage and regularly review installed software, and install only software packages required for business purposes.",
+    "family": [
+      [
+        "Secure device configurations",
+        "Resource Custodians must utilize well-managed security configurations for hardware, software, and operating systems based on industry standards."
+      ]
+    ]
+  },
+  {
+    "class": "Vulnerability Assessment and Remediation",
+    "description": "Overly permissive default configuration settings provide an attacker with the ability to access data without authorization.",
+    "family": [
+      [
+        "Continuous vulnerability assessment & remediation",
+        "Resource Custodians must continuously assess and remediate vulnerabilities on all covered devices."
+      ],
+      [
+        "Authenticated scan",
+        "Resource Custodians must implement authenticated scans for vulnerability assessment of covered devices. Campus-provided scanning resources and campus-licensed software may be implemented to meet this requirement."
+      ],
+      [
+        "Intrusion detection",
+        "Resource Custodians must continuously monitor for signs of attack and compromise on all covered devices."
+      ]
+    ]
+  },
+  {
+    "class": "Device Physical Security",
+    "description": "Resource Custodians must utilize well-managed security configurations for hardware, software, and operating systems based on industry standards.",
+    "family": [
+      [
+        "Device physical security",
+        "Resource Custodians must secure covered devices from unauthorized physical access."
+      ]
+    ]
+  },
+  {
+    "class": "Application Software Security",
+    "description": "Attackers can discover and compromise covered data on devices that are not secured against vulnerabilities.",
+    "family": [
+      [
+        "Secure coding training",
+        "Resource Proprietors and Resource Custodians must ensure that programming staff who develop applications involving covered data complete secure development training."
+      ],
+      [
+        "Code review",
+        "Resource Proprietors and Resource Custodians must ensure that code review is incorporated into each phase of the software development life cycle."
+      ],
+      [
+        "Application security testing",
+        "Resource Proprietors must ensure that web-based and other application software handling covered data passes a security assessment prior to release to production and every two years thereafter."
+      ],
+      [
+        "Commercial software assessment",
+        "Resource Proprietors and Resource Custodians must validate that commercial software meets security criteria used by the Campus Application Security Testing Program prior to purchase."
+      ]
+    ]
+  },
+  {
+    "class": "Mobile and Wireless Device Control",
+    "description": "Resource Custodians must continuously assess and remediate vulnerabilities on all covered devices.",
+    "family": [
+      [
+        "No \"institutional\" devices on mobile/wireless devices",
+        "Resource Custodian must not implement institutional devices (as defined in the Device/Use Categories of this standard) on mobile or wireless devices."
+      ]
+    ]
+  },
+  {
+    "class": "Privacy and Security Training",
+    "description": "Resource Custodians must implement authenticated scans for vulnerability assessment of covered devices. Campus-provided scanning resources and campus-licensed software may be implemented to meet this requirement.",
+    "family": []
+  },
+  {
+    "class": "Separating Resources and Limiting Reuse",
+    "description": "Resource Custodians must continuously monitor for signs of attack and compromise on all covered devices.",
+    "family": [
+      [
+        "Unique passphrases",
+        "Resource Proprietors, Resource Custodians and Users of covered devices must meet the following password uniqueness requirements:"
+      ],
+      [
+        "Separation of accounts",
+        "Resource Proprietors and Resource Custodians must create one application account per individual so that there is no sharing of an individual account between multiple people."
+      ],
+      [
+        "Separation of system resources",
+        "Resource Proprietors and Resource Custodians must appropriately limit the sharing and re-use of databases and system hardware across unique systems or environments."
+      ]
+    ]
+  },
+  {
+    "class": "Controlled Use of Administrative Privileges",
+    "description": "Requirement",
+    "family": [
+      [
+        "Use of admin accounts only on secure devices",
+        "Administrative credentials must be used only on devices that have been configured according to the Secure device configurations control."
+      ],
+      [
+        "Admin account security",
+        "Administrative accounts and credentials must use strong authentication, be separated from high-risk activities, and meet all requirements from the Account Monitoring and Management control."
+      ]
+    ]
+  },
+  {
+    "class": "Boundary Defense",
+    "description": "Resource Custodians must secure covered devices from unauthorized physical access.",
+    "family": [
+      [
+        "Managed hardware firewall",
+        "Resource Custodians must protect all institutional devices with a well-managed hardware firewall configured according to the principle of least privileges. These firewall rules must be reviewed annually and updated as necessary."
+      ],
+      [
+        "Protected subnets",
+        "Resource Proprietors and Resource Custodians must implement institutional devices on protected subnets."
+      ]
+    ]
+  },
+  {
+    "class": "Security Audit Logging",
+    "description": "Security vulnerabilities in application software allow data theft.",
+    "family": [
+      [
+        "Security audit logging",
+        "Resource Custodians must collect and store security audit logs for covered devices."
+      ]
+    ]
+  },
+  {
+    "class": "Controlled Access Based on the Need to Know",
+    "description": "Resource Proprietors and Resource Custodians must ensure that programming staff who develop applications involving covered data complete secure development training.",
+    "family": [
+      [
+        "Controlled access based on need-to-know",
+        "Resource Proprietors must control access to covered data and regularly review access permissions to allow the use of and access to covered data only where strictly necessary for legitimate business processes."
+      ]
+    ]
+  },
+  {
+    "class": "Account Monitoring and Management",
+    "description": "Resource Proprietors and Resource Custodians must ensure that code review is incorporated into each phase of the software development life cycle.",
+    "family": [
+      [
+        "Account monitoring and management",
+        "Resource Proprietors and Resource Custodians must manage, protect from attack, and regularly review accounts."
+      ]
+    ]
+  },
+  {
+    "class": "Data Loss Prevention",
+    "description": "Resource Proprietors must ensure that web-based and other application software handling covered data passes a security assessment prior to release to production and every two years thereafter.",
+    "family": [
+      [
+        "Encryption in transit",
+        "Resource Custodians and anyone moving covered data through a network must use secure, authenticated, and industry-accepted encryption mechanisms. (See the Encryption in transit guidelines for important considerations and exceptions regarding this control.)"
+      ],
+      [
+        "Encryption on mobile devices and removable storage media",
+        "Anyone storing covered data on portable devices (such as laptops and smartphones) or removable and easily transported storage media (such as USB drives or CDs/DVDs) must use industry-accepted encryption technologies."
+      ],
+      [
+        "Secure deletion upon decommission",
+        "Resource Custodians must ensure that any systems (laptops, workstations, and servers) and devices (smartphones, USB drives) storing covered data must be securely overwritten or wiped using an approved secure file deletion utility upon decommissioning of the device to ensure that the information cannot be recovered. For those devices that cannot be overwritten (defective hard drives, CDs/DVDs), Resource Custodians must ensure the device is destroyed prior to disposal."
+      ],
+      [
+        "Data access agreements",
+        "Resource Proprietors must establish Data Access Agreements that define appropriate use and access to covered data, as well as procedures for obtaining approval for deviance from restrictions."
+      ]
+    ]
+  }
+]

@@ -1,6 +1,8 @@
 import py2neo
 from py2neo import Node, NodeMatcher, Relationship
 from tqdm import tqdm
+import json
+import os
 import csv
 
 # 连接数据库
@@ -173,4 +175,30 @@ def AssetFamilyImprot():
             new_node = Node("ASSETFAMILY", name=row[1], description=row[2])
             graph.create(new_node)
             rel = Relationship(class_node, "include", new_node)
+            graph.create(rel)
+
+
+def OSPImport():
+    OSP_json_path = r"./DATA/OSP/MSSEI.json"
+    if os.path.exists(OSP_json_path):
+        pass
+    else:
+        print("the OSP json is not generated, please run 'ProcessOSP.Html2Json")
+        return
+
+    with open(OSP_json_path, 'r') as json_file:
+        data = json.load(json_file)
+
+    for item in data:
+        class_name = item["class"]
+        desc = item["description"]
+        class_node = Node("OSPCLASS", name=class_name, description=desc)
+        graph.create(class_node)
+        class_node = matcher.match("OSPCLASS", name=class_name).first()
+        for fam in item["family"]:
+            fam_name = fam[0]
+            desc = fam[1]
+            fam_node = Node("OSPFAMILY", name=fam_name, description=desc)
+            graph.create(fam_node)
+            rel = Relationship(class_node, "include", fam_node)
             graph.create(rel)
