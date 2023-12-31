@@ -1,0 +1,2022 @@
+[
+  {
+    "No.": "1228",
+    "name": "API / Function Errors",
+    "include": [
+      [
+        "242",
+        "Use of Inherently Dangerous Function"
+      ],
+      [
+        "474",
+        "Use of Function with Inconsistent Implementations"
+      ],
+      [
+        "475",
+        "Undefined Behavior for Input to API"
+      ],
+      [
+        "477",
+        "Use of Obsolete Function"
+      ],
+      [
+        "676",
+        "Use of Potentially Dangerous Function"
+      ],
+      [
+        "695",
+        "Use of Low-Level Functionality"
+      ],
+      [
+        "749",
+        "Exposed Dangerous Method or Function"
+      ]
+    ]
+  },
+  {
+    "No.": "1210",
+    "name": "Audit / Logging Errors",
+    "include": [
+      [
+        "117",
+        "Improper Output Neutralization for Logs"
+      ],
+      [
+        "222",
+        "Truncation of Security-relevant Information"
+      ],
+      [
+        "223",
+        "Omission of Security-relevant Information"
+      ],
+      [
+        "224",
+        "Obscured Security-relevant Information by Alternate Name"
+      ],
+      [
+        "778",
+        "Insufficient Logging"
+      ],
+      [
+        "779",
+        "Logging of Excessive Data"
+      ]
+    ]
+  },
+  {
+    "No.": "1211",
+    "name": "Authentication Errors",
+    "include": [
+      [
+        "289",
+        "Authentication Bypass by Alternate Name"
+      ],
+      [
+        "290",
+        "Authentication Bypass by Spoofing"
+      ],
+      [
+        "294",
+        "Authentication Bypass by Capture-replay"
+      ],
+      [
+        "295",
+        "Improper Certificate Validation"
+      ],
+      [
+        "301",
+        "Reflection Attack in an Authentication Protocol"
+      ],
+      [
+        "303",
+        "Incorrect Implementation of Authentication Algorithm"
+      ],
+      [
+        "305",
+        "Authentication Bypass by Primary Weakness"
+      ],
+      [
+        "306",
+        "Missing Authentication for Critical Function"
+      ],
+      [
+        "307",
+        "Improper Restriction of Excessive Authentication Attempts"
+      ],
+      [
+        "308",
+        "Use of Single-factor Authentication"
+      ],
+      [
+        "309",
+        "Use of Password System for Primary Authentication"
+      ],
+      [
+        "322",
+        "Key Exchange without Entity Authentication"
+      ],
+      [
+        "603",
+        "Use of Client-Side Authentication"
+      ],
+      [
+        "645",
+        "Overly Restrictive Account Lockout Mechanism"
+      ],
+      [
+        "804",
+        "Guessable CAPTCHA"
+      ],
+      [
+        "836",
+        "Use of Password Hash Instead of Password for Authentication"
+      ]
+    ]
+  },
+  {
+    "No.": "1212",
+    "name": "Authorization Errors",
+    "include": [
+      [
+        "425",
+        "Direct Request ('Forced Browsing'"
+      ],
+      [
+        "551",
+        "Incorrect Behavior Order: Authorization Before Parsing and Canonicalization"
+      ],
+      [
+        "552",
+        "Files or Directories Accessible to External Parties"
+      ],
+      [
+        "639",
+        "Authorization Bypass Through User-Controlled Key"
+      ],
+      [
+        "653",
+        "Improper Isolation or Compartmentalization"
+      ],
+      [
+        "939",
+        "Improper Authorization in Handler for Custom URL Scheme"
+      ],
+      [
+        "842",
+        "Placement of User into Incorrect Group"
+      ],
+      [
+        "1220",
+        "Insufficient Granularity of Access Control"
+      ],
+      [
+        "1230",
+        "Exposure of Sensitive Information Through Metadata"
+      ]
+    ]
+  },
+  {
+    "No.": "1006",
+    "name": "Bad Coding Practices",
+    "include": [
+      [
+        "358",
+        "Improperly Implemented Security Check for Standard"
+      ],
+      [
+        "360",
+        "Trust of System Event Data"
+      ],
+      [
+        "478",
+        "Missing Default Case in Multiple Condition Expression"
+      ],
+      [
+        "487",
+        "Reliance on Package-level Scope"
+      ],
+      [
+        "489",
+        "Active Debug Code"
+      ],
+      [
+        "547",
+        "Use of Hard-coded, Security-relevant Constants"
+      ],
+      [
+        "561",
+        "Dead Code"
+      ],
+      [
+        "562",
+        "Return of Stack Variable Address"
+      ],
+      [
+        "563",
+        "Assignment to Variable without Use"
+      ],
+      [
+        "581",
+        "Object Model Violation: Just One of Equals and Hashcode Defined"
+      ],
+      [
+        "586",
+        "Explicit Call to Finalize"
+      ],
+      [
+        "605",
+        "Multiple Binds to the Same Port"
+      ],
+      [
+        "628",
+        "Function Call with Incorrectly Specified Arguments"
+      ],
+      [
+        "654",
+        "Reliance on a Single Factor in a Security Decision"
+      ],
+      [
+        "656",
+        "Reliance on Security Through Obscurity"
+      ],
+      [
+        "694",
+        "Use of Multiple Resources with Duplicate Identifier"
+      ],
+      [
+        "807",
+        "Reliance on Untrusted Inputs in a Security Decision"
+      ],
+      [
+        "1041",
+        "Use of Redundant Code"
+      ],
+      [
+        "1043",
+        "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements"
+      ],
+      [
+        "1044",
+        "Architecture with Number of Horizontal Layers Outside of Expected Range"
+      ],
+      [
+        "1045",
+        "Parent Class with a Virtual Destructor and a Child Class without a Virtual Destructor"
+      ],
+      [
+        "1046",
+        "Creation of Immutable Text Using String Concatenation"
+      ],
+      [
+        "1048",
+        "Invokable Control Element with Large Number of Outward Calls"
+      ],
+      [
+        "1049",
+        "Excessive Data Query Operations in a Large Data Table"
+      ],
+      [
+        "1050",
+        "Excessive Platform Resource Consumption within a Loop"
+      ],
+      [
+        "1063",
+        "Creation of Class Instance within a Static Code Block"
+      ],
+      [
+        "1065",
+        "Runtime Resource Management Control Element in a Component Built to Run on Application Servers"
+      ],
+      [
+        "1066",
+        "Missing Serialization Control Element"
+      ],
+      [
+        "1067",
+        "Excessive Execution of Sequential Searches of Data Resource"
+      ],
+      [
+        "1070",
+        "Serializable Data Element Containing non-Serializable Item Elements"
+      ],
+      [
+        "1071",
+        "Empty Code Block"
+      ],
+      [
+        "1072",
+        "Data Resource Access without Use of Connection Pooling"
+      ],
+      [
+        "1073",
+        "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses"
+      ],
+      [
+        "1079",
+        "Parent Class without Virtual Destructor Method"
+      ],
+      [
+        "1082",
+        "Class Instance Self Destruction Control Element"
+      ],
+      [
+        "1084",
+        "Invokable Control Element with Excessive File or Data Access Operations"
+      ],
+      [
+        "1085",
+        "Invokable Control Element with Excessive Volume of Commented-out Code"
+      ],
+      [
+        "1087",
+        "Class with Virtual Method without a Virtual Destructor"
+      ],
+      [
+        "1089",
+        "Large Data Table with Excessive Number of Indices"
+      ],
+      [
+        "1092",
+        "Use of Same Invokable Control Element in Multiple Architectural Layers"
+      ],
+      [
+        "1094",
+        "Excessive Index Range Scan for a Data Resource"
+      ],
+      [
+        "1097",
+        "Persistent Storable Data Element without Associated Comparison Control Element"
+      ],
+      [
+        "1098",
+        "Data Element containing Pointer Item without Proper Copy Control Element"
+      ],
+      [
+        "1099",
+        "Inconsistent Naming Conventions for Identifiers"
+      ],
+      [
+        "1101",
+        "Reliance on Runtime Component in Generated Code"
+      ],
+      [
+        "1102",
+        "Reliance on Machine-Dependent Data Representation"
+      ],
+      [
+        "1103",
+        "Use of Platform-Dependent Third Party Components"
+      ],
+      [
+        "1104",
+        "Use of Unmaintained Third Party Components"
+      ],
+      [
+        "1106",
+        "Insufficient Use of Symbolic Constants"
+      ],
+      [
+        "1107",
+        "Insufficient Isolation of Symbolic Constant Definitions"
+      ],
+      [
+        "1108",
+        "Excessive Reliance on Global Variables"
+      ],
+      [
+        "1109",
+        "Use of Same Variable for Multiple Purposes"
+      ],
+      [
+        "1113",
+        "Inappropriate Comment Style"
+      ],
+      [
+        "1114",
+        "Inappropriate Whitespace Style"
+      ],
+      [
+        "1115",
+        "Source Code Element without Standard Prologue"
+      ],
+      [
+        "1116",
+        "Inaccurate Comments"
+      ],
+      [
+        "1117",
+        "Callable with Insufficient Behavioral Summary"
+      ],
+      [
+        "1126",
+        "Declaration of Variable with Unnecessarily Wide Scope"
+      ],
+      [
+        "1127",
+        "Compilation with Insufficient Warnings or Errors"
+      ],
+      [
+        "1235",
+        "Incorrect Use of Autoboxing and Unboxing for Performance Critical Operations"
+      ]
+    ]
+  },
+  {
+    "No.": "438",
+    "name": "Behavioral Problems",
+    "include": [
+      [
+        "115",
+        "Misinterpretation of Input"
+      ],
+      [
+        "179",
+        "Incorrect Behavior Order: Early Validation"
+      ],
+      [
+        "408",
+        "Incorrect Behavior Order: Early Amplification"
+      ],
+      [
+        "437",
+        "Incomplete Model of Endpoint Features"
+      ],
+      [
+        "439",
+        "Behavioral Change in New Version or Environment"
+      ],
+      [
+        "440",
+        "Expected Behavior Violation"
+      ],
+      [
+        "444",
+        "Inconsistent Interpretation of HTTP Requests ('HTTP Request/Response Smuggling'"
+      ],
+      [
+        "480",
+        "Use of Incorrect Operator"
+      ],
+      [
+        "483",
+        "Incorrect Block Delimitation"
+      ],
+      [
+        "484",
+        "Omitted Break Statement in Switch"
+      ],
+      [
+        "551",
+        "Incorrect Behavior Order: Authorization Before Parsing and Canonicalization"
+      ],
+      [
+        "698",
+        "Execution After Redirect (EAR"
+      ],
+      [
+        "733",
+        "Compiler Optimization Removal or Modification of Security-critical Code"
+      ],
+      [
+        "783",
+        "Operator Precedence Logic Error"
+      ],
+      [
+        "835",
+        "Loop with Unreachable Exit Condition ('Infinite Loop'"
+      ],
+      [
+        "837",
+        "Improper Enforcement of a Single, Unique Action"
+      ],
+      [
+        "841",
+        "Improper Enforcement of Behavioral Workflow"
+      ],
+      [
+        "1025",
+        "Comparison Using Wrong Factors"
+      ],
+      [
+        "1037",
+        "Processor Optimization Removal or Modification of Security-critical Code"
+      ]
+    ]
+  },
+  {
+    "No.": "840",
+    "name": "Business Logic Errors",
+    "include": [
+      [
+        "283",
+        "Unverified Ownership"
+      ],
+      [
+        "639",
+        "Authorization Bypass Through User-Controlled Key"
+      ],
+      [
+        "640",
+        "Weak Password Recovery Mechanism for Forgotten Password"
+      ],
+      [
+        "708",
+        "Incorrect Ownership Assignment"
+      ],
+      [
+        "770",
+        "Allocation of Resources Without Limits or Throttling"
+      ],
+      [
+        "826",
+        "Premature Release of Resource During Expected Lifetime"
+      ],
+      [
+        "837",
+        "Improper Enforcement of a Single, Unique Action"
+      ],
+      [
+        "841",
+        "Improper Enforcement of Behavioral Workflow"
+      ]
+    ]
+  },
+  {
+    "No.": "417",
+    "name": "Communication Channel Errors",
+    "include": [
+      [
+        "322",
+        "Key Exchange without Entity Authentication"
+      ],
+      [
+        "346",
+        "Origin Validation Error"
+      ],
+      [
+        "385",
+        "Covert Timing Channel"
+      ],
+      [
+        "419",
+        "Unprotected Primary Channel"
+      ],
+      [
+        "420",
+        "Unprotected Alternate Channel"
+      ],
+      [
+        "425",
+        "Direct Request ('Forced Browsing'"
+      ],
+      [
+        "515",
+        "Covert Storage Channel"
+      ],
+      [
+        "918",
+        "Server-Side Request Forgery (SSRF"
+      ],
+      [
+        "924",
+        "Improper Enforcement of Message Integrity During Transmission in a Communication Channel"
+      ],
+      [
+        "940",
+        "Improper Verification of Source of a Communication Channel"
+      ],
+      [
+        "941",
+        "Incorrectly Specified Destination in a Communication Channel"
+      ],
+      [
+        "1327",
+        "Binding to an Unrestricted IP Address"
+      ]
+    ]
+  },
+  {
+    "No.": "1226",
+    "name": "Complexity Issues",
+    "include": [
+      [
+        "1043",
+        "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements"
+      ],
+      [
+        "1047",
+        "Modules with Circular Dependencies"
+      ],
+      [
+        "1055",
+        "Multiple Inheritance from Concrete Classes"
+      ],
+      [
+        "1056",
+        "Invokable Control Element with Variadic Parameters"
+      ],
+      [
+        "1060",
+        "Excessive Number of Inefficient Server-Side Data Accesses"
+      ],
+      [
+        "1064",
+        "Invokable Control Element with Signature Containing an Excessive Number of Parameters"
+      ],
+      [
+        "1074",
+        "Class with Excessively Deep Inheritance"
+      ],
+      [
+        "1075",
+        "Unconditional Control Flow Transfer outside of Switch Block"
+      ],
+      [
+        "1080",
+        "Source Code File with Excessive Number of Lines of Code"
+      ],
+      [
+        "1086",
+        "Class with Excessive Number of Child Classes"
+      ],
+      [
+        "1095",
+        "Loop Condition Value Update within the Loop"
+      ],
+      [
+        "1119",
+        "Excessive Use of Unconditional Branching"
+      ],
+      [
+        "1121",
+        "Excessive McCabe Cyclomatic Complexity"
+      ],
+      [
+        "1122",
+        "Excessive Halstead Complexity"
+      ],
+      [
+        "1123",
+        "Excessive Use of Self-Modifying Code"
+      ],
+      [
+        "1124",
+        "Excessively Deep Nesting"
+      ],
+      [
+        "1125",
+        "Excessive Attack Surface"
+      ],
+      [
+        "1333",
+        "Inefficient Regular Expression Complexity"
+      ]
+    ]
+  },
+  {
+    "No.": "557",
+    "name": "Concurrency Issues",
+    "include": [
+      [
+        "364",
+        "Signal Handler Race Condition"
+      ],
+      [
+        "366",
+        "Race Condition within a Thread"
+      ],
+      [
+        "367",
+        "Time-of-check Time-of-use (TOCTOU) Race Condition"
+      ],
+      [
+        "368",
+        "Context Switching Race Condition"
+      ],
+      [
+        "386",
+        "Symbolic Name not Mapping to Correct Object"
+      ],
+      [
+        "421",
+        "Race Condition During Access to Alternate Channel"
+      ],
+      [
+        "663",
+        "Use of a Non-reentrant Function in a Concurrent Context"
+      ],
+      [
+        "820",
+        "Missing Synchronization"
+      ],
+      [
+        "821",
+        "Incorrect Synchronization"
+      ],
+      [
+        "1058",
+        "Invokable Control Element in Multi-Thread Context with non-Final Static Storable or Member Element"
+      ],
+      [
+        "1322",
+        "Use of Blocking Code in Single-threaded, Non-blocking Context"
+      ]
+    ]
+  },
+  {
+    "No.": "255",
+    "name": "Credentials Management Errors",
+    "include": [
+      [
+        "256",
+        "Plaintext Storage of a Password"
+      ],
+      [
+        "257",
+        "Storing Passwords in a Recoverable Format"
+      ],
+      [
+        "260",
+        "Password in Configuration File"
+      ],
+      [
+        "261",
+        "Weak Encoding for Password"
+      ],
+      [
+        "262",
+        "Not Using Password Aging"
+      ],
+      [
+        "263",
+        "Password Aging with Long Expiration"
+      ],
+      [
+        "324",
+        "Use of a Key Past its Expiration Date"
+      ],
+      [
+        "521",
+        "Weak Password Requirements"
+      ],
+      [
+        "523",
+        "Unprotected Transport of Credentials"
+      ],
+      [
+        "549",
+        "Missing Password Field Masking"
+      ],
+      [
+        "620",
+        "Unverified Password Change"
+      ],
+      [
+        "640",
+        "Weak Password Recovery Mechanism for Forgotten Password"
+      ],
+      [
+        "798",
+        "Use of Hard-coded Credentials"
+      ],
+      [
+        "916",
+        "Use of Password Hash With Insufficient Computational Effort"
+      ],
+      [
+        "1392",
+        "Use of Default Credentials"
+      ]
+    ]
+  },
+  {
+    "No.": "310",
+    "name": "Cryptographic Issues",
+    "include": [
+      [
+        "261",
+        "Weak Encoding for Password"
+      ],
+      [
+        "324",
+        "Use of a Key Past its Expiration Date"
+      ],
+      [
+        "325",
+        "Missing Cryptographic Step"
+      ],
+      [
+        "328",
+        "Use of Weak Hash"
+      ],
+      [
+        "331",
+        "Insufficient Entropy"
+      ],
+      [
+        "334",
+        "Small Space of Random Values"
+      ],
+      [
+        "335",
+        "Incorrect Usage of Seeds in Pseudo-Random Number Generator (PRNG"
+      ],
+      [
+        "338",
+        "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG"
+      ],
+      [
+        "347",
+        "Improper Verification of Cryptographic Signature"
+      ],
+      [
+        "916",
+        "Use of Password Hash With Insufficient Computational Effort"
+      ],
+      [
+        "1204",
+        "Generation of Weak Initialization Vector (IV"
+      ],
+      [
+        "1240",
+        "Use of a Cryptographic Primitive with a Risky Implementation"
+      ]
+    ]
+  },
+  {
+    "No.": "320",
+    "name": "Key Management Errors",
+    "include": [
+      [
+        "322",
+        "Key Exchange without Entity Authentication"
+      ],
+      [
+        "323",
+        "Reusing a Nonce, Key Pair in Encryption"
+      ],
+      [
+        "324",
+        "Use of a Key Past its Expiration Date"
+      ],
+      [
+        "798",
+        "Use of Hard-coded Credentials"
+      ]
+    ]
+  },
+  {
+    "No.": "1214",
+    "name": "Data Integrity Issues",
+    "include": [
+      [
+        "322",
+        "Key Exchange without Entity Authentication"
+      ],
+      [
+        "346",
+        "Origin Validation Error"
+      ],
+      [
+        "347",
+        "Improper Verification of Cryptographic Signature"
+      ],
+      [
+        "348",
+        "Use of Less Trusted Source"
+      ],
+      [
+        "349",
+        "Acceptance of Extraneous Untrusted Data With Trusted Data"
+      ],
+      [
+        "351",
+        "Insufficient Type Distinction"
+      ],
+      [
+        "353",
+        "Missing Support for Integrity Check"
+      ],
+      [
+        "354",
+        "Improper Validation of Integrity Check Value"
+      ],
+      [
+        "494",
+        "Download of Code Without Integrity Check"
+      ],
+      [
+        "565",
+        "Reliance on Cookies without Validation and Integrity Checking"
+      ],
+      [
+        "649",
+        "Reliance on Obfuscation or Encryption of Security-Relevant Inputs without Integrity Checking"
+      ],
+      [
+        "829",
+        "Inclusion of Functionality from Untrusted Control Sphere"
+      ],
+      [
+        "924",
+        "Improper Enforcement of Message Integrity During Transmission in a Communication Channel"
+      ]
+    ]
+  },
+  {
+    "No.": "19",
+    "name": "Data Processing Errors",
+    "include": [
+      [
+        "130",
+        "Improper Handling of Length Parameter Inconsistency"
+      ],
+      [
+        "166",
+        "Improper Handling of Missing Special Element"
+      ],
+      [
+        "167",
+        "Improper Handling of Additional Special Element"
+      ],
+      [
+        "168",
+        "Improper Handling of Inconsistent Special Elements"
+      ],
+      [
+        "178",
+        "Improper Handling of Case Sensitivity"
+      ],
+      [
+        "182",
+        "Collapse of Data into Unsafe Value"
+      ],
+      [
+        "186",
+        "Overly Restrictive Regular Expression"
+      ],
+      [
+        "229",
+        "Improper Handling of Values"
+      ],
+      [
+        "233",
+        "Improper Handling of Parameters"
+      ],
+      [
+        "237",
+        "Improper Handling of Structural Elements"
+      ],
+      [
+        "241",
+        "Improper Handling of Unexpected Data Type"
+      ],
+      [
+        "409",
+        "Improper Handling of Highly Compressed Data (Data Amplification"
+      ],
+      [
+        "472",
+        "External Control of Assumed-Immutable Web Parameter"
+      ],
+      [
+        "601",
+        "URL Redirection to Untrusted Site ('Open Redirect'"
+      ],
+      [
+        "611",
+        "Improper Restriction of XML External Entity Reference"
+      ],
+      [
+        "624",
+        "Executable Regular Expression Error"
+      ],
+      [
+        "625",
+        "Permissive Regular Expression"
+      ],
+      [
+        "776",
+        "Improper Restriction of Recursive Entity References in DTDs ('XML Entity Expansion'"
+      ],
+      [
+        "1024",
+        "Comparison of Incompatible Types"
+      ]
+    ]
+  },
+  {
+    "No.": "137",
+    "name": "Data Neutralization Issues",
+    "include": [
+      [
+        "76",
+        "Improper Neutralization of Equivalent Special Elements"
+      ],
+      [
+        "78",
+        "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection'"
+      ],
+      [
+        "79",
+        "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting'"
+      ],
+      [
+        "88",
+        "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection'"
+      ],
+      [
+        "89",
+        "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection'"
+      ],
+      [
+        "90",
+        "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection'"
+      ],
+      [
+        "91",
+        "XML Injection (aka Blind XPath Injection"
+      ],
+      [
+        "93",
+        "Improper Neutralization of CRLF Sequences ('CRLF Injection'"
+      ],
+      [
+        "94",
+        "Improper Control of Generation of Code ('Code Injection'"
+      ],
+      [
+        "117",
+        "Improper Output Neutralization for Logs"
+      ],
+      [
+        "140",
+        "Improper Neutralization of Delimiters"
+      ],
+      [
+        "170",
+        "Improper Null Termination"
+      ],
+      [
+        "463",
+        "Deletion of Data Structure Sentinel"
+      ],
+      [
+        "464",
+        "Addition of Data Structure Sentinel"
+      ],
+      [
+        "641",
+        "Improper Restriction of Names for Files and Other Resources"
+      ],
+      [
+        "694",
+        "Use of Multiple Resources with Duplicate Identifier"
+      ],
+      [
+        "791",
+        "Incomplete Filtering of Special Elements"
+      ],
+      [
+        "838",
+        "Inappropriate Encoding for Output Context"
+      ],
+      [
+        "917",
+        "Improper Neutralization of Special Elements used in an Expression Language Statement ('Expression Language Injection'"
+      ],
+      [
+        "1236",
+        "Improper Neutralization of Formula Elements in a CSV File"
+      ]
+    ]
+  },
+  {
+    "No.": "1225",
+    "name": "Documentation Issues",
+    "include": [
+      [
+        "1053",
+        "Missing Documentation for Design"
+      ],
+      [
+        "1068",
+        "Inconsistency Between Implementation and Documented Design"
+      ],
+      [
+        "1110",
+        "Incomplete Design Documentation"
+      ],
+      [
+        "1111",
+        "Incomplete I/O Documentation"
+      ],
+      [
+        "1112",
+        "Incomplete Documentation of Program Execution"
+      ],
+      [
+        "1118",
+        "Insufficient Documentation of Error Handling Techniques"
+      ]
+    ]
+  },
+  {
+    "No.": "1219",
+    "name": "File Handling Issues",
+    "include": [
+      [
+        "22",
+        "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal'"
+      ],
+      [
+        "41",
+        "Improper Resolution of Path Equivalence"
+      ],
+      [
+        "59",
+        "Improper Link Resolution Before File Access ('Link Following'"
+      ],
+      [
+        "66",
+        "Improper Handling of File Names that Identify Virtual Resources"
+      ],
+      [
+        "378",
+        "Creation of Temporary File With Insecure Permissions"
+      ],
+      [
+        "379",
+        "Creation of Temporary File in Directory with Insecure Permissions"
+      ],
+      [
+        "426",
+        "Untrusted Search Path"
+      ],
+      [
+        "427",
+        "Uncontrolled Search Path Element"
+      ],
+      [
+        "428",
+        "Unquoted Search Path or Element"
+      ]
+    ]
+  },
+  {
+    "No.": "1227",
+    "name": "Encapsulation Issues",
+    "include": [
+      [
+        "1054",
+        "Invocation of a Control Element at an Unnecessarily Deep Horizontal Layer"
+      ],
+      [
+        "1057",
+        "Data Access Operations Outside of Expected Data Manager Component"
+      ],
+      [
+        "1062",
+        "Parent Class with References to Child Class"
+      ],
+      [
+        "1083",
+        "Data Access from Outside Expected Data Manager Component"
+      ],
+      [
+        "1090",
+        "Method Containing Access of a Member Element from Another Class"
+      ],
+      [
+        "1100",
+        "Insufficient Isolation of System-Dependent Functions"
+      ],
+      [
+        "1105",
+        "Insufficient Encapsulation of Machine-Dependent Functionality"
+      ]
+    ]
+  },
+  {
+    "No.": "389",
+    "name": "Error Conditions, Return Values, Status Codes",
+    "include": [
+      [
+        "209",
+        "Generation of Error Message Containing Sensitive Information"
+      ],
+      [
+        "248",
+        "Uncaught Exception"
+      ],
+      [
+        "252",
+        "Unchecked Return Value"
+      ],
+      [
+        "253",
+        "Incorrect Check of Function Return Value"
+      ],
+      [
+        "390",
+        "Detection of Error Condition Without Action"
+      ],
+      [
+        "391",
+        "Unchecked Error Condition"
+      ],
+      [
+        "392",
+        "Missing Report of Error Condition"
+      ],
+      [
+        "393",
+        "Return of Wrong Status Code"
+      ],
+      [
+        "394",
+        "Unexpected Status Code or Return Value"
+      ],
+      [
+        "395",
+        "Use of NullPointerException Catch to Detect NULL Pointer Dereference"
+      ],
+      [
+        "396",
+        "Declaration of Catch for Generic Exception"
+      ],
+      [
+        "397",
+        "Declaration of Throws for Generic Exception"
+      ],
+      [
+        "544",
+        "Missing Standardized Error Handling Mechanism"
+      ],
+      [
+        "584",
+        "Return Inside Finally Block"
+      ],
+      [
+        "617",
+        "Reachable Assertion"
+      ],
+      [
+        "756",
+        "Missing Custom Error Page"
+      ]
+    ]
+  },
+  {
+    "No.": "569",
+    "name": "Expression Issues",
+    "include": [
+      [
+        "480",
+        "Use of Incorrect Operator"
+      ],
+      [
+        "570",
+        "Expression is Always False"
+      ],
+      [
+        "571",
+        "Expression is Always True"
+      ],
+      [
+        "783",
+        "Operator Precedence Logic Error"
+      ]
+    ]
+  },
+  {
+    "No.": "429",
+    "name": "Handler Errors",
+    "include": [
+      [
+        "430",
+        "Deployment of Wrong Handler"
+      ],
+      [
+        "431",
+        "Missing Handler"
+      ],
+      [
+        "434",
+        "Unrestricted Upload of File with Dangerous Type"
+      ]
+    ]
+  },
+  {
+    "No.": "199",
+    "name": "Information Management Errors",
+    "include": [
+      [
+        "201",
+        "Insertion of Sensitive Information Into Sent Data"
+      ],
+      [
+        "204",
+        "Observable Response Discrepancy"
+      ],
+      [
+        "205",
+        "Observable Behavioral Discrepancy"
+      ],
+      [
+        "208",
+        "Observable Timing Discrepancy"
+      ],
+      [
+        "209",
+        "Generation of Error Message Containing Sensitive Information"
+      ],
+      [
+        "212",
+        "Improper Removal of Sensitive Information Before Storage or Transfer"
+      ],
+      [
+        "213",
+        "Exposure of Sensitive Information Due to Incompatible Policies"
+      ],
+      [
+        "214",
+        "Invocation of Process Using Visible Sensitive Information"
+      ],
+      [
+        "215",
+        "Insertion of Sensitive Information Into Debugging Code"
+      ],
+      [
+        "312",
+        "Cleartext Storage of Sensitive Information"
+      ],
+      [
+        "319",
+        "Cleartext Transmission of Sensitive Information"
+      ],
+      [
+        "359",
+        "Exposure of Private Personal Information to an Unauthorized Actor"
+      ],
+      [
+        "497",
+        "Exposure of Sensitive System Information to an Unauthorized Control Sphere"
+      ],
+      [
+        "524",
+        "Use of Cache Containing Sensitive Information"
+      ],
+      [
+        "538",
+        "Insertion of Sensitive Information into Externally-Accessible File or Directory"
+      ],
+      [
+        "921",
+        "Storage of Sensitive Data in a Mechanism without Access Control"
+      ],
+      [
+        "1230",
+        "Exposure of Sensitive Information Through Metadata"
+      ]
+    ]
+  },
+  {
+    "No.": "452",
+    "name": "Initialization and Cleanup Errors",
+    "include": [
+      [
+        "212",
+        "Improper Removal of Sensitive Information Before Storage or Transfer"
+      ],
+      [
+        "454",
+        "External Initialization of Trusted Variables or Data Stores"
+      ],
+      [
+        "455",
+        "Non-exit on Failed Initialization"
+      ],
+      [
+        "459",
+        "Incomplete Cleanup"
+      ],
+      [
+        "1051",
+        "Initialization with Hard-Coded Network Resource Configuration Data"
+      ],
+      [
+        "1052",
+        "Excessive Use of Hard-Coded Literals in Initialization"
+      ],
+      [
+        "1188",
+        "Initialization of a Resource with an Insecure Default"
+      ]
+    ]
+  },
+  {
+    "No.": "1215",
+    "name": "Data Validation Issues",
+    "include": [
+      [
+        "112",
+        "Missing XML Validation"
+      ],
+      [
+        "179",
+        "Incorrect Behavior Order: Early Validation"
+      ],
+      [
+        "183",
+        "Permissive List of Allowed Inputs"
+      ],
+      [
+        "184",
+        "Incomplete List of Disallowed Inputs"
+      ],
+      [
+        "606",
+        "Unchecked Input for Loop Condition"
+      ],
+      [
+        "641",
+        "Improper Restriction of Names for Files and Other Resources"
+      ],
+      [
+        "1173",
+        "Improper Use of Validation Framework"
+      ],
+      [
+        "1284",
+        "Improper Validation of Specified Quantity in Input"
+      ],
+      [
+        "1285",
+        "Improper Validation of Specified Index, Position, or Offset in Input"
+      ],
+      [
+        "1286",
+        "Improper Validation of Syntactic Correctness of Input"
+      ],
+      [
+        "1287",
+        "Improper Validation of Specified Type of Input"
+      ],
+      [
+        "1288",
+        "Improper Validation of Consistency within Input"
+      ],
+      [
+        "1289",
+        "Improper Validation of Unsafe Equivalence in Input"
+      ]
+    ]
+  },
+  {
+    "No.": "1216",
+    "name": "Lockout Mechanism Errors",
+    "include": [
+      [
+        "645",
+        "Overly Restrictive Account Lockout Mechanism"
+      ]
+    ]
+  },
+  {
+    "No.": "1218",
+    "name": "Memory Buffer Errors",
+    "include": [
+      [
+        "120",
+        "Buffer Copy without Checking Size of Input ('Classic Buffer Overflow'"
+      ],
+      [
+        "124",
+        "Buffer Underwrite ('Buffer Underflow'"
+      ],
+      [
+        "125",
+        "Out-of-bounds Read"
+      ],
+      [
+        "131",
+        "Incorrect Calculation of Buffer Size"
+      ],
+      [
+        "786",
+        "Access of Memory Location Before Start of Buffer"
+      ],
+      [
+        "787",
+        "Out-of-bounds Write"
+      ],
+      [
+        "788",
+        "Access of Memory Location After End of Buffer"
+      ],
+      [
+        "805",
+        "Buffer Access with Incorrect Length Value"
+      ],
+      [
+        "1284",
+        "Improper Validation of Specified Quantity in Input"
+      ]
+    ]
+  },
+  {
+    "No.": "189",
+    "name": "Numeric Errors",
+    "include": [
+      [
+        "128",
+        "Wrap-around Error"
+      ],
+      [
+        "190",
+        "Integer Overflow or Wraparound"
+      ],
+      [
+        "191",
+        "Integer Underflow (Wrap or Wraparound"
+      ],
+      [
+        "193",
+        "Off-by-one Error"
+      ],
+      [
+        "369",
+        "Divide By Zero"
+      ],
+      [
+        "681",
+        "Incorrect Conversion between Numeric Types"
+      ],
+      [
+        "839",
+        "Numeric Range Comparison Without Minimum Check"
+      ],
+      [
+        "1335",
+        "Incorrect Bitwise Shift of Integer"
+      ],
+      [
+        "1339",
+        "Insufficient Precision or Accuracy of a Real Number"
+      ],
+      [
+        "1389",
+        "Incorrect Parsing of Numbers with Different Radices"
+      ]
+    ]
+  },
+  {
+    "No.": "275",
+    "name": "Permission Issues",
+    "include": [
+      [
+        "276",
+        "Incorrect Default Permissions"
+      ],
+      [
+        "277",
+        "Insecure Inherited Permissions"
+      ],
+      [
+        "278",
+        "Insecure Preserved Inherited Permissions"
+      ],
+      [
+        "279",
+        "Incorrect Execution-Assigned Permissions"
+      ],
+      [
+        "280",
+        "Improper Handling of Insufficient Permissions or Privileges "
+      ],
+      [
+        "281",
+        "Improper Preservation of Permissions"
+      ],
+      [
+        "618",
+        "Exposed Unsafe ActiveX Method"
+      ],
+      [
+        "766",
+        "Critical Data Element Declared Public"
+      ],
+      [
+        "767",
+        "Access to Critical Private Variable via Public Method"
+      ]
+    ]
+  },
+  {
+    "No.": "465",
+    "name": "Pointer Issues",
+    "include": [
+      [
+        "466",
+        "Return of Pointer Value Outside of Expected Range"
+      ],
+      [
+        "468",
+        "Incorrect Pointer Scaling"
+      ],
+      [
+        "469",
+        "Use of Pointer Subtraction to Determine Size"
+      ],
+      [
+        "476",
+        "NULL Pointer Dereference"
+      ],
+      [
+        "587",
+        "Assignment of a Fixed Address to a Pointer"
+      ],
+      [
+        "763",
+        "Release of Invalid Pointer or Reference"
+      ],
+      [
+        "822",
+        "Untrusted Pointer Dereference"
+      ],
+      [
+        "823",
+        "Use of Out-of-range Pointer Offset"
+      ],
+      [
+        "824",
+        "Access of Uninitialized Pointer"
+      ],
+      [
+        "825",
+        "Expired Pointer Dereference"
+      ]
+    ]
+  },
+  {
+    "No.": "265",
+    "name": "Privilege Issues",
+    "include": [
+      [
+        "243",
+        "Creation of chroot Jail Without Changing Working Directory"
+      ],
+      [
+        "250",
+        "Execution with Unnecessary Privileges"
+      ],
+      [
+        "266",
+        "Incorrect Privilege Assignment"
+      ],
+      [
+        "267",
+        "Privilege Defined With Unsafe Actions"
+      ],
+      [
+        "268",
+        "Privilege Chaining"
+      ],
+      [
+        "270",
+        "Privilege Context Switching Error"
+      ],
+      [
+        "272",
+        "Least Privilege Violation"
+      ],
+      [
+        "273",
+        "Improper Check for Dropped Privileges"
+      ],
+      [
+        "274",
+        "Improper Handling of Insufficient Privileges"
+      ],
+      [
+        "280",
+        "Improper Handling of Insufficient Permissions or Privileges "
+      ],
+      [
+        "501",
+        "Trust Boundary Violation"
+      ],
+      [
+        "580",
+        "clone() Method Without super.clone"
+      ],
+      [
+        "648",
+        "Incorrect Use of Privileged APIs"
+      ]
+    ]
+  },
+  {
+    "No.": "1213",
+    "name": "Random Number Issues",
+    "include": [
+      [
+        "331",
+        "Insufficient Entropy"
+      ],
+      [
+        "334",
+        "Small Space of Random Values"
+      ],
+      [
+        "335",
+        "Incorrect Usage of Seeds in Pseudo-Random Number Generator (PRNG"
+      ],
+      [
+        "338",
+        "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG"
+      ],
+      [
+        "341",
+        "Predictable from Observable State"
+      ],
+      [
+        "342",
+        "Predictable Exact Value from Previous Values"
+      ],
+      [
+        "343",
+        "Predictable Value Range from Previous Values"
+      ],
+      [
+        "344",
+        "Use of Invariant Value in Dynamically Changing Context"
+      ],
+      [
+        "1241",
+        "Use of Predictable Algorithm in Random Number Generator"
+      ]
+    ]
+  },
+  {
+    "No.": "411",
+    "name": "Resource Locking Problems",
+    "include": [
+      [
+        "412",
+        "Unrestricted Externally Accessible Lock"
+      ],
+      [
+        "413",
+        "Improper Resource Locking"
+      ],
+      [
+        "414",
+        "Missing Lock Check"
+      ],
+      [
+        "609",
+        "Double-Checked Locking"
+      ],
+      [
+        "764",
+        "Multiple Locks of a Critical Resource"
+      ],
+      [
+        "765",
+        "Multiple Unlocks of a Critical Resource"
+      ],
+      [
+        "832",
+        "Unlock of a Resource that is not Locked"
+      ],
+      [
+        "833",
+        "Deadlock"
+      ]
+    ]
+  },
+  {
+    "No.": "399",
+    "name": "Resource Management Errors",
+    "include": [
+      [
+        "73",
+        "External Control of File Name or Path"
+      ],
+      [
+        "403",
+        "Exposure of File Descriptor to Unintended Control Sphere ('File Descriptor Leak'"
+      ],
+      [
+        "410",
+        "Insufficient Resource Pool"
+      ],
+      [
+        "470",
+        "Use of Externally-Controlled Input to Select Classes or Code ('Unsafe Reflection'"
+      ],
+      [
+        "502",
+        "Deserialization of Untrusted Data"
+      ],
+      [
+        "619",
+        "Dangling Database Cursor ('Cursor Injection'"
+      ],
+      [
+        "641",
+        "Improper Restriction of Names for Files and Other Resources"
+      ],
+      [
+        "694",
+        "Use of Multiple Resources with Duplicate Identifier"
+      ],
+      [
+        "763",
+        "Release of Invalid Pointer or Reference"
+      ],
+      [
+        "770",
+        "Allocation of Resources Without Limits or Throttling"
+      ],
+      [
+        "771",
+        "Missing Reference to Active Allocated Resource"
+      ],
+      [
+        "772",
+        "Missing Release of Resource after Effective Lifetime"
+      ],
+      [
+        "826",
+        "Premature Release of Resource During Expected Lifetime"
+      ],
+      [
+        "908",
+        "Use of Uninitialized Resource"
+      ],
+      [
+        "909",
+        "Missing Initialization of Resource"
+      ],
+      [
+        "910",
+        "Use of Expired File Descriptor"
+      ],
+      [
+        "911",
+        "Improper Update of Reference Count"
+      ],
+      [
+        "914",
+        "Improper Control of Dynamically-Identified Variables"
+      ],
+      [
+        "915",
+        "Improperly Controlled Modification of Dynamically-Determined Object Attributes"
+      ],
+      [
+        "920",
+        "Improper Restriction of Power Consumption"
+      ],
+      [
+        "1188",
+        "Initialization of a Resource with an Insecure Default"
+      ],
+      [
+        "1341",
+        "Multiple Releases of Same Resource or Handle"
+      ]
+    ]
+  },
+  {
+    "No.": "387",
+    "name": "Signal Errors",
+    "include": [
+      [
+        "364",
+        "Signal Handler Race Condition"
+      ]
+    ]
+  },
+  {
+    "No.": "371",
+    "name": "State Issues",
+    "include": [
+      [
+        "15",
+        "External Control of System or Configuration Setting"
+      ],
+      [
+        "372",
+        "Incomplete Internal State Distinction"
+      ],
+      [
+        "374",
+        "Passing Mutable Objects to an Untrusted Method"
+      ],
+      [
+        "375",
+        "Returning a Mutable Object to an Untrusted Caller"
+      ],
+      [
+        "1265",
+        "Unintended Reentrant Invocation of Non-reentrant Code Via Nested Calls"
+      ]
+    ]
+  },
+  {
+    "No.": "133",
+    "name": "String Errors",
+    "include": [
+      [
+        "134",
+        "Use of Externally-Controlled Format String"
+      ],
+      [
+        "135",
+        "Incorrect Calculation of Multi-Byte String Length"
+      ],
+      [
+        "480",
+        "Use of Incorrect Operator"
+      ]
+    ]
+  },
+  {
+    "No.": "136",
+    "name": "Type Errors",
+    "include": [
+      [
+        "681",
+        "Incorrect Conversion between Numeric Types"
+      ],
+      [
+        "843",
+        "Access of Resource Using Incompatible Type ('Type Confusion'"
+      ],
+      [
+        "1287",
+        "Improper Validation of Specified Type of Input"
+      ]
+    ]
+  },
+  {
+    "No.": "355",
+    "name": "User Interface Security Issues",
+    "include": [
+      [
+        "356",
+        "Product UI does not Warn User of Unsafe Actions"
+      ],
+      [
+        "357",
+        "Insufficient UI Warning of Dangerous Operations"
+      ],
+      [
+        "447",
+        "Unimplemented or Unsupported Feature in UI"
+      ],
+      [
+        "448",
+        "Obsolete Feature in UI"
+      ],
+      [
+        "449",
+        "The UI Performs the Wrong Action"
+      ],
+      [
+        "549",
+        "Missing Password Field Masking"
+      ],
+      [
+        "1007",
+        "Insufficient Visual Distinction of Homoglyphs Presented to User"
+      ],
+      [
+        "1021",
+        "Improper Restriction of Rendered UI Layers or Frames"
+      ]
+    ]
+  },
+  {
+    "No.": "1217",
+    "name": "User Session Errors",
+    "include": [
+      [
+        "488",
+        "Exposure of Data Element to Wrong Session"
+      ],
+      [
+        "613",
+        "Insufficient Session Expiration"
+      ],
+      [
+        "841",
+        "Improper Enforcement of Behavioral Workflow"
+      ]
+    ]
+  }
+]

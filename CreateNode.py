@@ -215,3 +215,51 @@ def SOImport():
     for row in reader:
         new_node = Node("SO", name=row[0], description=row[1])
         graph.create(new_node)
+
+
+def CWEImport():
+    CWE_file_path = r"./DATA/CWE/CWE.json"
+    with open(CWE_file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        # 导入Class节点
+        for cla in tqdm(data, desc="Processing CWE nodes"):
+            cla_name = "CWE-" + cla["No."]
+            cla_fullname = cla["name"]
+            cla_node = Node("CWECLASS", name=cla_name, fullname=cla_fullname)
+            graph.create(cla_node)
+            cla_node = matcher.match("CWECLASS", name=cla_name, fullname=cla_fullname).first()
+            # 导入Family节点
+            for fam in cla["include"]:
+                fam_name = "CWE_" + fam[0]
+                fam_fullname = fam[1]
+                fam_node = Node("CWEFAMILY", name=fam_name, fullname=fam_fullname)
+                graph.create(fam_node)
+                rel = Relationship(cla_node, "include", fam_node)
+                graph.create(rel)
+    # 将"./DATA/CWE/CWE.csv"的信息更新给CWE family节点
+    CWE_file_path = r"./DATA/CWE/CWE.csv"
+    with open(CWE_file_path, "r", encoding="utf-8") as file:
+        total_line = sum(1 for line in file)
+    attri = ["ID", "name", "Weakness Abstraction", "Status",
+             "Description", "Extended Description", "Related Weaknesses", "Weakness Ordinalities",
+             "Applicable Platforms", "Background Details", "Alternate Terms", "Modes Of Introduction",
+             "Exploitation Factors", "Likelihood of Exploit", "Common Consequences", "Detection Methods",
+             "Potential Mitigations", "Observed Examples", "Functional Areas", "Affected Resources",
+             "Taxonomy Mappings", "Related Attack Patterns", "Notes"
+             ]
+    with open(CWE_file_path, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in tqdm(reader, total=total_line, desc="Updating CWE family nodes"):
+            name = "CWE_" + row[0]
+            node = matcher.match("CWEFAMILY", name=name).first()
+            if node:
+                for i in range(2, len(attri)):
+                    if row[i]:
+                        node[attri[i]] = row[i]
+                    else:
+                        node[attri[i]] = ""
+                graph.push(node)
+            else:
+                print(f"CWE_{row[0]} does not exsit")
+                return

@@ -1,0 +1,103 @@
+function onloadSetup(){
+	var thisIDs = getUrlParameter('id');
+	var thisID = parseInt(thisIDs);
+        if(isNaN(thisID)) {
+		$("table#MainPane").replaceWith('<div style="margin-left:25px;"><h2>ERROR</h2><h3>View ID is NaN</h3><h4>Please specify <a href="/custom/view.html?id=1000">CWE-1000</a>, <a href="/custom/view.html?id=1194">CWE-1194</a>, or <a href="/custom/view.html?id=699">CWE-699</a>.</h4></div>');
+
+        }else if(['1000','1194','699'].indexOf(thisIDs) > -1) {
+		if (/^1000$/.test(thisIDs)) {
+			$("h2").append(' ' + thisID + ' - Research Concepts');
+		}else if (/^1194$/.test(thisIDs)) {
+                        $("h2").append(' ' + thisID + ' - Hardware Design');
+                }else if (/^699$/.test(thisIDs)) {
+                        $("h2").append(' ' + thisID + ' - Software Development');
+                }
+		$("table.viewtable").toggleClass('view' + thisID);
+        } else {
+		$("table#MainPane").replaceWith('<div style="margin-left:25px;"><h2>ERROR</h2><h3>Unaccepted value for View ID</h3><h4>Please specify <a href="/custom/view.html?id=1000">CWE-1000</a>, <a href="/custom/view.html?id=1194">CWE-1194</a>, or <a href="/custom/view.html?id=699">CWE-699</a>.</h4></div>');
+        }
+} 
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+}
+
+/* Iterate over each unordered list of checkbox fields (cb_grid class is set)
+   Get the bit flag in base 36 to shorten the number, pre-pend the encoded operator, and return the querystring
+   */
+function submitCustom(){
+    var qs = getQueryString();
+    if(/^\s*$/.test(qs)) {
+        $("table#MainPane").replaceWith('<div style="margin-left:25px;"><h2>ERROR</h2><h3>Querystring was malformed</h3><h4>Please notify <a href="mailto:cwe@mitre.org">cwe@mitre.org</a> if this problem continues.</h4></div>');
+    }
+    else {
+        window.location.href='/cgi-bin/viewgen.cgi?id=' + getID() + '&qs=' + qs;
+    }
+}
+
+/*Returns the ID of the GET parameter only if it matches the whitelist, otherwise return empty string */
+function getID(){
+    var thisIDs = getUrlParameter('id');
+    var thisID = parseInt(thisIDs);
+    if(isNaN(thisID)) {
+       return ""; 
+    }else if(['1000','1194','699'].indexOf(thisIDs) > -1) {
+        return thisIDs;
+    } else {
+        return "";
+    }
+}
+function getQueryString(){
+    var querystring = "";
+    $("ul.cb_grid").each(function( index ){ 
+        var bitflag = getCBBitFlag(this.id);
+        if(!isNaN(bitflag)) {
+            /* number of characters is ceil(log36(2^x)) where x is the number of options. */ 
+            /*[1-5]=1, [6-10]=2, [11-15]=3, [16-20]=4, [21-25]=5, [26-31]=6 */
+            querystring+= "_" + bitflag.toString(36);
+        }
+        else {
+            querystring = "_FAIL_";
+            return ;
+        }
+    }); /* end of ul.cb_grid each() */
+    if(/_FAIL_/.test(querystring)) {
+         return "";
+    }
+    else {
+        return querystring;
+    }    
+}
+
+/* Returns an integer representing the bit flag of the named checkbox group
+   Returns NaN if the checkbox group name is malformed 
+   Returns 0 otherwise
+   Assumes all values are unique
+*/
+function getCBBitFlag(sCBGroup){
+    if(/^[a-zA-Z_]+$/.test(sCBGroup)) {
+        var bitflags = 0;
+        $("ul#" + sCBGroup + " li input:checked").each(function( li_index ){ 
+            if(isNaN(bitflags) || isNaN(Math.pow(2,this.value))) {
+                bitflags = NaN;
+            }
+            else {
+                bitflags |= (this.checked)?Math.pow(2,this.value) : 0;
+            }
+        });
+        return bitflags;
+    }
+    else {
+        return NaN;
+    }
+}
+
