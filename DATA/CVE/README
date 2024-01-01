@@ -1,0 +1,1 @@
+`./DATA/CVE/CVE.csv`中只有最新的50000个cve漏洞，且排除"dispute", "reject"等漏洞。

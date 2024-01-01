@@ -240,12 +240,12 @@ def CWEImport():
     CWE_file_path = r"./DATA/CWE/CWE.csv"
     with open(CWE_file_path, "r", encoding="utf-8") as file:
         total_line = sum(1 for line in file)
-    attri = ["ID", "name", "Weakness Abstraction", "Status",
-             "Description", "Extended Description", "Related Weaknesses", "Weakness Ordinalities",
-             "Applicable Platforms", "Background Details", "Alternate Terms", "Modes Of Introduction",
-             "Exploitation Factors", "Likelihood of Exploit", "Common Consequences", "Detection Methods",
-             "Potential Mitigations", "Observed Examples", "Functional Areas", "Affected Resources",
-             "Taxonomy Mappings", "Related Attack Patterns", "Notes"
+    attri = ["ID", "name", "WeaknessAbstraction", "Status",
+             "description", "ExtendedDescription", "RelatedWeaknesses", "WeaknessOrdinalities",
+             "ApplicablePlatforms", "BackgroundDetails", "AlternateTerms", "ModesOfIntroduction",
+             "ExploitationFactors", "LikelihoodofExploit", "CommonConsequences", "DetectionMethods",
+             "PotentialMitigations", "ObservedExamples", "FunctionalAreas", "AffectedResources",
+             "TaxonomyMappings", "RelatedAttackPatterns", "Notes"
              ]
     with open(CWE_file_path, "r", encoding="utf-8") as file:
         reader = csv.reader(file)

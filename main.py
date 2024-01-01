@@ -22,4 +22,5 @@ if __name__ == '__main__':
     # CreateNode.AssetClassImport()  # 导入5个资产实体类
     # CreateNode.AssetFamilyImprot()  # 导入24个资产实体族
     # CreateNode.OSPImport()  # 导入组织安全策略
-    CreateNode.OSPImport()  # 导入安全目的
+    # CreateNode.OSPImport()  # 导入安全目的
+    CreateNode.CWEImport()

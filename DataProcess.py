@@ -3,6 +3,11 @@ import json
 import csv
 from itertools import islice
 from tqdm import tqdm
+import py2neo
+from py2neo import Node, NodeMatcher, Relationship
+
+graph = py2neo.Graph("neo4j://172.28.45.149:7687", auth=("neo4j", "password"))
+matcher = NodeMatcher(graph)
 
 
 def trimSpace(s: str):
@@ -171,3 +176,32 @@ def CVEGetLastest():
                 pass
             else:
                 csv_writer.writerow(row)
+
+
+def CWEDesc():
+    """
+    生成CWE表格，header = ['name', 'fullname', "desc+ex_desc"]
+    方便后续调用OPENAI进行处理
+    """
+    label = "CWEFAMILY"
+    query = (f'match(n:{label}) '
+             f'return n.name as name, n.fullname as fullname, '
+             f'n.description as desc, n.ExtendedDescription as ex_desc,'
+             f'n.ObservedExamples as examples ')
+    result = graph.run(query)  # run返回的不是一个列表，而是可迭代的对象
+
+    desc_file_path = r"./DATA/CWE/DescCWE.csv"
+    # header = ['name', 'fullname', "desc"]
+    with (open(desc_file_path, "w", encoding='utf-8', newline="") as file):
+        writer = csv.writer(file)
+        for node in result:
+            a = node["desc"]
+            b = node["ex_desc"]
+            if b is not None:
+                a = a + b
+            row = [node["name"], node["fullname"], a]
+            writer.writerow(row)
+
+
+if __name__ == "__main__":
+    CWEDesc()
